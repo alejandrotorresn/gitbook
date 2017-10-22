@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Instalación](instalacion.md)
+* [Instalación de Docker](instalacion.md)
 * [Red Overlay sin  Swarm](overlay-networking-sin-swarm.md)
 * [Docker Swarm](docker-swarm.md)
 
