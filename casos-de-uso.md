@@ -295,6 +295,12 @@ z69mh6gdtx80        test_eve            replicated          1/1                 
 
 * Ingresar a la dirección [http://192.168.99.100](http://192.168.99.100:8888) para verficar que el servicio es valido.
 
+
+
+
+
+
+
 ## CASO 1.
 
 servicios a correr
