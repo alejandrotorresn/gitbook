@@ -1,4 +1,4 @@
-# CASOS DE USO -SWARM MODE
+# CASOS DE USO - SWARM MODE
 
 Para los casos de uso se implementaran un solo nodo **manager **y tres nodos **worker**. Estos nodos se crearan mediante **docker-machine** y en _VirtualBox_.
 
@@ -7,7 +7,38 @@ Se implementaran los servicios de **MongoDB**, un servidor REST basado en **Eve 
 ## REQUISITOS PREVIOS
 
 1. Creación de las máquinas virtuales en _VirtualBox_
-2. Creación de las imagenes necesarias. P 
+2. Creación del Swarm
+3. Creación de las imagenes necesarias \(Eve y Analítica de Datos\)
+
+### CREACIÓN DE LAS MÁQUINAS VIRTUALES
+
+* Creación del nodo Manager \(Es recomendable asignarle un mínimo de 4GB de memoria al nodo manager\):
+
+```
+$ docker-machine create -d virtualbox --virtualbox-memory 4096 manager
+```
+
+* Creación de los nodos Worker
+
+```
+$ docker-machien create -d virtualbox worker1 worker2 worker3
+```
+
+### CREACIÓN DEL SWARM
+
+
+
+
+
+### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
+
+
+
+
+
+
+
+
 
 ## CASO 1.
 
