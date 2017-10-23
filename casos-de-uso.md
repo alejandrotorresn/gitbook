@@ -278,13 +278,16 @@ $ docker images
 $ docker service create --name test_eve --constraint 'node.hostname == manager' --publish 80:80 eve_apache
 ```
 
+* Verificar que el servicio se encuentra ejecutandose.
 
+```
+$ docker service ls
 
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+z69mh6gdtx80        test_eve            replicated          1/1                 eve_apache:latest     *:80->80/tcp
+```
 
-
-
-
-dock
+* Ingresar a la dirección [http://192.168.99.100](http://192.168.99.100:8888) para verficar que el servicio es valido.
 
 ## CASO 1.
 
