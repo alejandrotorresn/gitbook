@@ -1,5 +1,7 @@
 # INSTALACIÓN DE DOCKER MACHINE EN LINUX
 
+![](/assets/docker-machine.png)
+
 * [Instalar Docker \(docker engine\)](/instalacion.md)
 
 * Descargar el binario de **Docker Machine** y habiliatarlo en el PATH
