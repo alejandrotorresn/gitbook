@@ -1,6 +1,6 @@
 # ADMINISTRACIÓN DE LOS NODOS EN SWARM
 
-* Ingresar al nodo manager \(**manager1**\):
+Ingresar al nodo manager \(**manager1**\):
 
 ```
 $ docker-machine ssh manager1
