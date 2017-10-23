@@ -6,9 +6,13 @@ Se implementaran los servicios de **MongoDB**, un servidor REST basado en **Eve 
 
 ## REQUISITOS PREVIOS
 
-1. Creación de las máquinas virtuales en _VirtualBox_
-2. Creación del Swarm
-3. Creación de las imagenes necesarias \(Eve y Analítica de Datos\)
+1. [Instalación de Docker Engine](/instalacion.md)
+2. [Instalación de Docker Machine](/instalacion-de-docker-machine.md)
+3. Creación de las máquinas virtuales en _VirtualBox_
+4. Creación del Swarm
+5. Creación de las imagenes necesarias \(Eve y Analítica de Datos\)
+
+Los dos primeros requisitos pueden satisfacerse siguiendo el enlace.
 
 ### CREACIÓN DE LAS MÁQUINAS VIRTUALES
 
@@ -87,7 +91,7 @@ $ docker-machine regenerate-certs manager
 * Ingresar al nodo **manager**.
 
 ```
-$ docker-machien ssh manager
+$ docker-machine ssh manager
 ```
 
 * Inicializar el modo Swarm.
@@ -98,7 +102,7 @@ $ docker swarm init --advertise-addr 192.168.99.100
 
 La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por tanto, debe especificarle la dirección IP que retorna el comando **docker-machine ip manager**.
 
-La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm. 
+La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm.
 
 Copiar la salida en el portapapeles.
 
@@ -136,15 +140,38 @@ $ exit
 
 Repetir estos pasos para los nodos **worker2 **y **worker3**.
 
-
-
-
-
-
-
-
-
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
+
+Los archivos Dockerfile que contienen la creación de estas dos imagenes se encuentran en GitHub. Para descargarlos ejecutar:
+
+```
+$ git clone https://github.com/alejandrotorresn/Analytic_eve.git
+```
+
+El contenido debe ser similar al mostrado a continuación:
+
+```
+├── Eve
+│   ├── 000-default.conf
+│   ├── Dockerfile
+│   ├── run.py
+│   ├── settings.py
+│   ├── user1
+│   │   ├── insert.json
+│   │   ├── insert.json.gz
+│   │   ├── run.py
+│   │   └── settings.py
+│   └── user2
+│       ├── insert.json
+│       ├── insert.json.gz
+│       ├── run.py
+│       └── settings.py
+├── miniconda_p27
+│   └── Dockerfile
+└── README.md
+```
+
+
 
 ## CASO 1.
 
