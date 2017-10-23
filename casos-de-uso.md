@@ -28,13 +28,19 @@ $ docker-machine create -d virtualbox worker3
 
 ### CREACIÓN DEL SWARM
 
+Antes de crear el Swarm se recomienda establecer la dirección IP del nodo manager como dirección estática, para ello se debe:
+
+* Obtener la dirección dada por el servidor DHCP a la máquina **manager** creada por docker-machien.
+
+```
+$ docker-machine ip manager
+```
+
+
+
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
 
 ## CASO 1.
-
-
-
-
 
 servicios a correr
 
@@ -45,12 +51,6 @@ servicios a correr
 1 servicio Eve para el usuario2 - Dos replicas - puerto YY
 
 1 servicio de analitica de datos
-
-
-
-
-
-
 
 use case2:
 
