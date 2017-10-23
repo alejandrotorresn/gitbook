@@ -16,13 +16,13 @@ A continuación se detallan los pasos de la instalación:
 * Actualización de la base de datos de los repositorios de Ubuntu.
 
 ```
-sudo apt-get update -y
+$ sudo apt-get update -y
 ```
 
 * Agregar la clave GPG del repositorio oficial de Docker:
 
 ```
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 ```
 
 * Agregar el repositorio oficial de Docker a las repositorios de Ubuntu:
@@ -30,25 +30,25 @@ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58
 Para Ubuntu 16.04
 
 ```
-sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+$ sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
 ```
 
 Para Ubuntu 17.04
 
 ```
-sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-zesty main'
+$ sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-zesty main'
 ```
 
 * Actualizar los repositorios de Ubuntu:
 
 ```
-sudo apt-get update -y
+$ sudo apt-get update -y
 ```
 
 * Verificar si el paquete de instalación de Docker proviene de los repositorios oficiales:
 
 ```
-apt-cache policy docker-engine
+$ apt-cache policy docker-engine
 
 docker-engine:
   Installed: (none)
@@ -62,13 +62,13 @@ docker-engine:
 * Instalar Docker Engine:
 
 ```
-sudo apt-get install -y docker-engine
+$ sudo apt-get install -y docker-engine
 ```
 
 * Verificar que docker engine se este ejecutando:
 
 ```
-sudo systemctl status docker
+$ sudo systemctl status docker
 
     docker.service - Docker Application Container Engine
        Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
@@ -80,10 +80,8 @@ sudo systemctl status docker
 * Se recomienda configurar el comando **docker** para ser usado sin la necesidad del somando sudo:
 
 ```
-sudo usermod -aG docker $(whoami)
+$ sudo usermod -aG docker $(whoami)
 ```
 
 Se debe reiniciar la sesión para que este cambio sea efectivo.
-
-
 
