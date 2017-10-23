@@ -1,5 +1,7 @@
 # AGREGAR SERVICIOS A UN SWARM
 
+[Docker swarm-services](https://docs.docker.com/engine/swarm/services/)
+
 ## CREAR UN SERVICIO
 
 Creación de un servicio con un única replica y sin ninguna configuración adicional. Este comando inicia el servicio de Nginx con un nombre aleatorio y sin publicar puertos.
@@ -49,7 +51,7 @@ $ docker service ls
 
 Es posible actualizar cada parametro de un servicio existente usando el comando **docker service update**. Cuando se actualiza un servicio, docker detiene el contenedor y lo reinicia el servicio con la nueva configuración.
 
-Anteriormente se creo un servicio del servidor Nginx, pero no tiene expuesto el puerto 80 y por tanto no se es util en el mundo real. Al crear el servicio se puede especificar el puerto usando la bandera **-p** o **--publish**. 
+Anteriormente se creo un servicio del servidor Nginx, pero no tiene expuesto el puerto 80 y por tanto no se es util en el mundo real. Al crear el servicio se puede especificar el puerto usando la bandera **-p** o **--publish**.
 
 ```
 $ docker service create --name my_web --publish 80 nginx
@@ -67,9 +69,15 @@ Para remover un puerto previamente publicado se utiliza la bandera **--publish-r
 $ docker service update --publish-rm 80 my_web
 ```
 
-
-
 ## REMOVER UN SERVICIO
+
+Para remover un servicio se usa el comando **docker service remove**. El servicio puede ser removido usando su ID o su nombre, estos se muestran en la salida del comando **docker service ls**. 
+
+```
+$ docker service remove my_web
+```
+
+
 
 
 
