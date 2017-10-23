@@ -207,7 +207,7 @@ Por el momento las imagenes solo seran creadas en el nodo **manger**. Posteriorm
 
 De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(folder **Analytic\_eve**\).
 
-* Ingrese al directorio miniconda\_p27
+* Ingresar al directorio miniconda\_p27
 
 ```
 $ cd miniconda_p27
@@ -240,9 +240,31 @@ ID                  NAME                MODE                REPLICAS            
 ye8ngif9e4qe        test_analitica      replicated          1/1                 analitica_datos:latest   *:8888->8888/tcp
 ```
 
-* Ingresar a la dirección http://192.168.99.100:8888 para verficar que el servicio es valido.
+* Ingresar a la dirección [http://192.168.99.100:8888](http://192.168.99.100:8888) para verficar que el servicio es valido.
 
 ![](/assets/Analitica_test.png)
+
+* Eliminar el servicio de prueba para el contenedor de análitica.
+
+```
+$ docker service rm test_analitica
+```
+
+---
+
+**Creación de la Imagen del servicio REST - Eve**
+
+* Ingrese al directorio Eve
+
+```
+$ cd Eve
+```
+
+* Construir la imagen
+
+```
+$ docker build -t test_eve .
+```
 
 
 
