@@ -46,8 +46,6 @@ Engine Labels:
  - provider=virtualbox
 ```
 
-
-
 ### View the join command or update a swarm join token
 
 ```
