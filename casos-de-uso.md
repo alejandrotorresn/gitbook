@@ -142,6 +142,12 @@ Repetir estos pasos para los nodos **worker2 **y **worker3**.
 
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
 
+Ingresar al nodo **manager** del Swarm.
+
+```
+$ docker-machine ssh manager
+```
+
 Los archivos Dockerfile que contienen la creación de estas dos imagenes se encuentran en GitHub. Para descargarlos ejecutar:
 
 ```
@@ -171,7 +177,25 @@ El contenido debe ser similar al mostrado a continuación:
 └── README.md
 ```
 
+Por el momento las imagenes solo seran creadas en el nodo **manger**. Posteriormente se vera que se debe tener la imagen base en donde desee crearse el servicio.
 
+---
+
+**Creación de la imagen de Analitica de datos.**
+
+De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(folder **Analytic\_eve**\).
+
+* Ingrese al directorio miniconda\_p27
+
+```
+$ cd miniconda_p27
+```
+
+* Construir la imagen.
+
+```
+docker build -t analitica_datos .
+```
 
 ## CASO 1.
 
