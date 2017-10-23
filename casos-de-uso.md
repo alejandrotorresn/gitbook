@@ -297,6 +297,10 @@ elh3v5ugfl5i        test_eve            replicated          1/1                 
 
 * Ingresar a la dirección [http://192.168.99.100](http://192.168.99.100:8888) para verficar que el servicio es valido.
 
+![](/assets/Eve_test.png)
+
+La configuración básica del Servidor REST Eve pide un usuario y una contraseña. Por el momento no se han ingresado usuarios, por lo tanto el servidor Eve mostrara información como la mostrada en la imagen anterior. 
+
 ## CASO 1.
 
 servicios a correr
