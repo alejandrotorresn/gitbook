@@ -6,7 +6,7 @@ Ingresar al nodo manager \(**manager1**\):
 $ docker-machine ssh manager1
 ```
 
-**Listar los nodos de Swarm**
+* **Listar los nodos de Swarm**
 
 ```
 $ docker node ls
@@ -18,7 +18,7 @@ nj1px46tmntlasu7ykhlruv7j     worker1             Ready               Active
 
 **NOTA:** El asterisco \(\*\) indica el nodo activo. Para este caso el _**manager1**_.
 
-**Inspecionar un nodo**
+* **Inspecionar un nodo**
 
 ```
 $ docker node inspect worker1 --pretty
