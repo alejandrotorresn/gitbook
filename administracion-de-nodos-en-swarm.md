@@ -18,10 +18,11 @@ nj1px46tmntlasu7ykhlruv7j     worker1             Ready               Active
 
 **NOTA:** El asterisco \(\*\) indica el nodo activo. Para este caso el _**manager1**_.
 
-## Inspect an individual node {#inspect-an-individual-node}
+**Inspecionar un nodo**
 
 ```
-docker@manager1:~$ docker node inspect worker1 --pretty
+$ docker node inspect worker1 --pretty
+
 
 ID:                     nj1px46tmntlasu7ykhlruv7j
 Hostname:               worker1
