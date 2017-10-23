@@ -263,10 +263,28 @@ $ cd Eve
 * Construir la imagen
 
 ```
-$ docker build -t test_eve .
+$ docker build -t eve_apache .
+```
+
+Verificar que la imagen ha sido creada correctamente.
+
+```
+$ docker images
+```
+
+* Verificar que puede ejecutarse el servicio de Eve.
+
+```
+$ docker service create --name test_eve --constraint 'node.hostname == manager' --publish 80:80 eve_apache
 ```
 
 
+
+
+
+
+
+dock
 
 ## CASO 1.
 
