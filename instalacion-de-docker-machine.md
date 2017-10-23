@@ -1,6 +1,6 @@
 # INSTALACIÓN DE DOCKER MACHINE
 
-* \[Instalar Docker \(docker engine\)\]\(instalacion.md\)
+* \[Instalar Docker \(docker engine\)\]\(./instalacion.md\)
 
 * Descargar el binario de **Docker Machine** y habiliatarlo en el PATH
 
