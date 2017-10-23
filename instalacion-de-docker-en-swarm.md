@@ -95,67 +95,41 @@ La ejecucion del comando nos devuelve el comando necesario para agregar un nodo 
 
 Para obtener el comando para incluir un worker al Swarm:
 
-```
-Ingresar al nodo manager \(manager1\):
-```
+* Ingresar al nodo manager \(**manager1**\):
 
+```
 $ docker-machine ssh manager1
-
-```
-Ejecutar el comando docker swarm join-token worker y salir de la máquina manager1:
 ```
 
+* Ejecutar el comando docker swarm join-token worker:
+
+```
 $ docker swarm join-token worker
 
-To add a worker to this swarm, run the following command:
-
-```
-docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959
 ```
 
-rvgfj 192.168.99.100:2377
+* Salir de la máquina **manager1**:
 
+```
 $ exit
-
-Comando se usara para agregar un worker.
-
-```
-docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
 ```
 
-NOTA: Para cada configuración se genera un token personalizado.
-
-Para obtener el comando para incluir un worker al Swarm:
+* Ingresar al nodo worker \(**worker1**\):
 
 ```
-Ingresar al nodo manager \(manager1\):
+$ docker-machine ssh worker1
 ```
 
-$ docker-machine ssh manager1
+* Agregar el nodo **worker1** al Swarm mediante la ejecución del comando retornado al inicializar el Swarm y salir de la máquina:
 
 ```
-Ejecutar el comando docker swarm join-token worker y salir de la máquina manager1:
-```
-
-$ docker swarm join-token worker
-
-To add a worker to this swarm, run the following command:
-
-```
-docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959
-```
-
-rvgfj 192.168.99.100:2377
-
+$ docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
 $ exit
-
-Comando se usara para agregar un worker.
-
-```
-docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
 ```
 
-NOTA: Para cada configuración se genera un token personalizado.
+**NOTA**: Para cada configuración se genera un token personalizado.
 
-AWS
+## AWS
+
+
 
