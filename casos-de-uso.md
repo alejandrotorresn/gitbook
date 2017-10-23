@@ -289,17 +289,13 @@ $ docker service create --name test_eve --constraint 'node.hostname == manager' 
 ```
 $ docker service ls
 
+
 ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-z69mh6gdtx80        test_eve            replicated          1/1                 eve_apache:latest     *:80->80/tcp
+546j5e76f8i2        mongo_eve           replicated          1/1                 mongo:latest        *:27017->27017/tcp
+elh3v5ugfl5i        test_eve            replicated          1/1                 test_eve:latest     *:80->80/tcp
 ```
 
 * Ingresar a la dirección [http://192.168.99.100](http://192.168.99.100:8888) para verficar que el servicio es valido.
-
-
-
-
-
-
 
 ## CASO 1.
 
