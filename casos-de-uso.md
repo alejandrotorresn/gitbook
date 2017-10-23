@@ -98,6 +98,52 @@ $ docker swarm init --advertise-addr 192.168.99.100
 
 La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por tanto, debe especificarle la dirección IP que retorna el comando **docker-machine ip manager**.
 
+La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm. 
+
+Copiar la salida en el portapapeles.
+
+> docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
+
+* Salir del nodo **manager**.
+
+```
+exit
+```
+
+---
+
+**Agregar los  nodos al Swarm**.
+
+Si por algún motivo no ha copiado el comando para incluir un nodo en el Swarm, puede obtenerlo ejecutando el comando **docker swarm join-token worker** dentro del nodo **manager**.
+
+* Ingresar al nodo **worker1**.
+
+```
+$ docker-machine ssh worker1
+```
+
+* Agregar el nodo **worker1** al Swarm ejecutando el comando que se genero a la salida de la inicialización del Swarm.
+
+```
+$ docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
+```
+
+* Salir del nodo **worker1**.
+
+```
+$ exit
+```
+
+Repetir estos pasos para los nodos **worker2 **y **worker3**.
+
+
+
+
+
+
+
+
+
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
 
 ## CASO 1.
