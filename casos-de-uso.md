@@ -194,7 +194,13 @@ $ cd miniconda_p27
 * Construir la imagen.
 
 ```
-docker build -t analitica_datos .
+$ docker build -t analitica_datos .
+```
+
+* Verificar que la imagen ha sido creada correctamente.
+
+```
+$ docker images
 ```
 
 ## CASO 1.
