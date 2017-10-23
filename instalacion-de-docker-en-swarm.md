@@ -34,7 +34,7 @@ $ docker-machine ip manager1
     192.168.99.100
 ```
 
-* Ingresar a la máquina **manager1**:
+* Ingresar al nodo **manager1**:
 
 ```
 $ docker-machine ssh manager1
@@ -61,13 +61,13 @@ $ sudo chmod 755 /var/lib/boot2docker/bootsync.sh
 $ exit
 ```
 
-* Reiniciar la máquina **manager1**:
+* Reiniciar el nodo **manager1**:
 
 ```
 $ docker-machine restart manager1
 ```
 
-* Regenerar el certificado de la máquina **manager1**:
+* Regenerar el certificado del nodo **manager1**:
 
 ```
 $ docker-machine regenerate-certs manager1
@@ -75,7 +75,7 @@ $ docker-machine regenerate-certs manager1
 
 ### CREAR UN SWARM
 
-* Ingresar al nodo manager1:
+* Ingresar al nodo **manager1**:
 
 ```
 $ docker-machien ssh manager1
