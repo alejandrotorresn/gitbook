@@ -39,9 +39,37 @@ $ docker service create --name helloworld alpine ping docker.com
 $ docker service create --name helloworld alpine:3.6 ping docker.com
 ```
 
+## LISTAR SERVICIOS
+
+```
+$ docker service ls
+```
+
 ## ACTUALIZAR UN SERVICIO
 
+Es posible actualizar cada parametro de un servicio existente usando el comando **docker service update**. Cuando se actualiza un servicio, docker detiene el contenedor y lo reinicia el servicio con la nueva configuración.
 
+Anteriormente se creo un servicio del servidor Nginx, pero no tiene expuesto el puerto 80 y por tanto no se es util en el mundo real. Al crear el servicio se puede especificar el puerto usando la bandera **-p** o **--publish**. 
+
+```
+$ docker service create --name my_web --publish 80 nginx
+```
+
+Cuando se desea actualizar el servicio se debe usar la bandera **--publish-add**:
+
+```
+$ docker service update --publish-add 80 my_web
+```
+
+Para remover un puerto previamente publicado se utiliza la bandera **--publish-rm**:
+
+```
+$ docker service update --publish-rm 80 my_web
+```
+
+
+
+## REMOVER UN SERVICIO
 
 
 
