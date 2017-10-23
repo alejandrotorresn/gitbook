@@ -80,6 +80,24 @@ $ docker-machine restart manager
 $ docker-machine regenerate-certs manager
 ```
 
+---
+
+**Inicialización del modo Swarm en el nodo manager.**
+
+* Ingresar al nodo **manager**.
+
+```
+$ docker-machien ssh manager
+```
+
+* Inicializar el modo Swarm.
+
+```
+$ docker swarm init --advertise-addr 192.168.99.100
+```
+
+La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por tanto, debe especificarle la dirección IP que retorna el comando **docker-machine ip manager**.
+
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
 
 ## CASO 1.
