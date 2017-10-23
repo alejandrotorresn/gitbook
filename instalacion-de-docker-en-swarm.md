@@ -1,5 +1,7 @@
 # INSTALACION DE DOCKER EN SWARM
 
+![](/assets/swarm-diagram.png)
+
 La instalación de Docker en modo Swarm se hará en:
 
 * VirtualBox
