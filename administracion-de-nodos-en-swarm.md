@@ -46,40 +46,33 @@ Engine Labels:
  - provider=virtualbox
 ```
 
-### View the join command or update a swarm join token
+* **Obtener los comandos para agregar nuevo workers o managers.**
+
+**Workers**
 
 ```
-docker@manager1:~$ docker swarm join-token worker
-To add a worker to this swarm, run the following command:
-
-    docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
-
-docker@manager1:~$ docker swarm join-token manager
-To add a manager to this swarm, run the following command:
-
-    docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-brtem0czo5f7d46s7uponsfoy 192.168.99.100:2377
+$ docker swarm join-token worker
 ```
 
-#  {#title}
-
-Only token
+**Managers**
 
 ```
-docker@manager1:~$ docker swarm join-token --quiet worker
-SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj
+$ docker swarm join-token manager
 ```
 
-to invalidate the old token and generate a new token
+* **Obener solo el token**
 
 ```
-$docker swarm join-token  --rotate worker
-
-To add a worker to this swarm, run the following command:
-
-    docker swarm join \
---token SWMTKN-1-2kscvs0zuymrsc9t0ocyy1rdns9dhaodvpl639j2bqx55uptag-ebmn5u927reawo27s3azntd44 \
-    192.168.99.100:2377
+$ docker swarm join-token --quiet worker
 ```
+
+* **Regenerar los tokens**
+
+```
+$ docker swarm join-token --rotate worker
+```
+
+
 
 
 
