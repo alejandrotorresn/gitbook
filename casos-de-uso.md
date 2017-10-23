@@ -140,9 +140,31 @@ $ exit
 
 Repetir estos pasos para los nodos **worker2 **y **worker3**.
 
+---
+
+**Verificar que todos los nodos esten vinculados al Swarm.**
+
+* Ingresar al nodo **manager**.
+
+```
+$ docker-machine ssh manager
+```
+
+* Listar los nodos del Swarm
+
+```
+$ docker node ls
+
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+ugr65ekld1jz2zggcqvigrayy *   manager             Ready               Active              Leader
+oaiz3i7pf2if28o014mx2xevn     worker1             Ready               Active
+d42j6agkb19vz4ccq3hhs8eqs     worker2             Ready               Active
+5tg1yrf3kqm6i28rkjso6hfgg     worker3             Ready               Active
+```
+
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
 
-Ingresar al nodo **manager** del Swarm.
+Ingresar al nodo **manager** del Swarm sino lo esta.
 
 ```
 $ docker-machine ssh manager
@@ -202,6 +224,27 @@ $ docker build -t analitica_datos .
 ```
 $ docker images
 ```
+
+* Verificar que puede ejecutarse el servicio de **Análitica de Datos**.
+
+```
+$ docker service create --name test_analitica --constraint 'node.hostname == manager' --publish 8888:8888 analitica_datos
+```
+
+* Verificar que el servicio se encuentra ejecutandose.
+
+```
+$ docker service ls
+
+ID                  NAME                MODE                REPLICAS            IMAGE                    PORTS
+ye8ngif9e4qe        test_analitica      replicated          1/1                 analitica_datos:latest   *:8888->8888/tcp
+```
+
+* Ingresar a la dirección http://192.168.99.100:8888 para verficar que el servicio es valido.
+
+![](/assets/Analitica_test.png)
+
+
 
 ## CASO 1.
 
