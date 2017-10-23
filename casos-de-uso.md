@@ -272,6 +272,12 @@ Verificar que la imagen ha sido creada correctamente.
 $ docker images
 ```
 
+* Para evaluar el servicio de Eve se debe tener el servicio de **MongoDB** en funcionamiento, para ello se ejecuta:
+
+```
+$ docker service --name=mongo_eve --constraint 'node.hostname == manager' --publish 27017:27017 mongo
+```
+
 * Verificar que puede ejecutarse el servicio de Eve.
 
 ```
