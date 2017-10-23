@@ -36,7 +36,49 @@ Antes de crear el Swarm se recomienda establecer la dirección IP del nodo manag
 $ docker-machine ip manager
 ```
 
+* Ingresar al nodo **manager**.
 
+```
+$ docker-machine ssh manager
+```
+
+* Crear el archivo **bootsync.sh**
+
+```
+$ sudo vi /var/lib/boot2docker/bootsync.sh
+```
+
+* Ingresar los siguientes comandos en el archivo bootsync.sh
+
+```
+#!/bin/sh
+/etc/init.d/services/dhcp stop
+ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up
+```
+
+Se debe tener en cuenta que dirección IP ingresada en el archivo debe ser la misma que la obtenida con el comando docker-machine ip manager. De igual forma la dirección del broadcast debe concordar con la misma red.
+
+* Asignar los permisos adecuados al archivo _bootsync.sh_ y salir del nodo **manager**.
+
+```
+$ sudo chmod 755 /var/lib/boot2docker/bootsync.sh
+```
+
+```
+$ exit
+```
+
+* Reiniciar el nodo **manager**.
+
+```
+$ docker-machine restart manager
+```
+
+* Regenerar el certificado del nodo **manager**.
+
+```
+$ docker-machine regenerate-certs manager
+```
 
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
 
