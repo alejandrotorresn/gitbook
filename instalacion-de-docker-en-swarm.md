@@ -22,9 +22,9 @@ $ docker-machine create -d virtualbox worker1
 
 Al crear el nodo **manager1** se asigna una dirección IP a través del servicio DHCP. Se recomienda que este nodo tenga una dirección estática con el fin de que al reiniciar las máquinas no se pierda la conexión entre el manager y los workers.
 
-Para colocar una IP estática en una máquina creada por _docker-machine_ en Virtualbox se sigue el siguiente procedimiento:
+##### IP estática en una máquina creada por _docker-machine_ en Virtualbox:
 
-* Obtener la IP asignada por _docker-machine_:
+* ##### Obtener la IP asignada por _docker-machine_:
 
 ```
 $ docker-machine ip manager1
