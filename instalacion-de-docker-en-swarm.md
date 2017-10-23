@@ -106,6 +106,7 @@ $ docker-machine ssh manager1
 ```
 $ docker swarm join-token worker
 
+        docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
 ```
 
 * Salir de la máquina **manager1**:
