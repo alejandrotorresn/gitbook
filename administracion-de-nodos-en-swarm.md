@@ -6,17 +6,17 @@
 $ docker-machine ssh manager1
 ```
 
-
-
 **Listar los nodos de Swarm**
 
 ```
-docker@manager1:~$ docker node ls
+$ docker node ls
 
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
 i7l5245yf58tinn2hsab39d6i *   manager1            Ready               Active              Leader
 nj1px46tmntlasu7ykhlruv7j     worker1             Ready               Active
 ```
+
+**NOTA:** El asterisco \(\*\) indica el nodo activo. Para este caso el _**manager1**_.
 
 ## Inspect an individual node {#inspect-an-individual-node}
 
