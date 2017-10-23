@@ -1,4 +1,4 @@
-### ADMINISTRACIÓN DE LOS NODOS EN SWARM
+# ADMINISTRACIÓN DE LOS NODOS EN SWARM
 
 * Ingresar al nodo manager \(**manager1**\):
 
@@ -7,6 +7,8 @@ $ docker-machine ssh manager1
 ```
 
 
+
+**Listar los nodos de Swarm**
 
 ```
 docker@manager1:~$ docker node ls
