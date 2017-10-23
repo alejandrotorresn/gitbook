@@ -21,42 +21,36 @@ $ docker-machine create -d virtualbox --virtualbox-memory 4096 manager
 * Creación de los nodos Worker
 
 ```
-$ docker-machien create -d virtualbox worker1 worker2 worker3
+$ docker-machine create -d virtualbox worker1
+$ docker-machine create -d virtualbox worker2
+$ docker-machine create -d virtualbox worker3
 ```
 
 ### CREACIÓN DEL SWARM
 
-
-
-
-
 ### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
-
-
-
-
-
-
-
-
 
 ## CASO 1.
 
-* doc must include bootstrap with dockermachine
 
-* two analytics customers
 
-* 4 physical machines
 
-deployment:
 
-* 1 mongo service
+servicios a correr
 
-* eve service for customer1 \(with only one instance==replica\) at port XXXX
+1 servicio mongo
 
-* eve service for customer2 \(with two replicas\) at port YYYY
+1 servicio Eve para el usuario1 - Una sola replica - puerto XX
 
-* 1 analytics service
+1 servicio Eve para el usuario2 - Dos replicas - puerto YY
+
+1 servicio de analitica de datos
+
+
+
+
+
+
 
 use case2:
 
