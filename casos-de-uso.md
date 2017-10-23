@@ -2,13 +2,14 @@
 
 Para los casos de uso se implementaran un solo nodo **manager **y tres nodos **worker**. Estos nodos se crearan mediante **docker-machine** y en _VirtualBox_.
 
+Se implementaran los servicios de **MongoDB**, un servidor REST basado en **Eve **junto con una configuración personalizada de **Apache** que permite recibir archivos .gzip en el servicio REST y un contedor de **Analítica de Datos** \(Jupyter Notebook y Jupyter Lab\).
+
 ## REQUISITOS PREVIOS
 
-1. Creación de las máquinas virtuales 
+1. Creación de las máquinas virtuales en _VirtualBox_
+2. Creación de las imagenes necesarias. P 
 
 ## CASO 1.
-
-
 
 * doc must include bootstrap with dockermachine
 
@@ -34,7 +35,7 @@ use case2:
 
 3. mongo + eve customer1 permanently. eve customer2 + analytics ocasional
 
-* ganglia/swarm management/query web interface
+4. ganglia/swarm management/query web interface
 
 
 
