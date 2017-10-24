@@ -39,26 +39,25 @@ gpg:         new signatures: 1
 Para Ubuntu 16.04
 
 ```
-$ sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main']
 ```
-
 Para Ubuntu 17.04
 
 ```
-$ sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-zesty main'
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-zesty main']
 ```
 
 * Actualizar los repositorios de Ubuntu:
-
-```
-$ sudo apt-get update -y
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-get update -y]
 ```
 
 * Verificar si el paquete de instalación de Docker proviene de los repositorios oficiales:
 
-```
-$ apt-cache policy docker-engine
-
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command apt-cache policy docker-engine]
 docker-engine:
   Installed: (none)
   Candidate: 17.05.0~ce-0~ubuntu-zesty
@@ -70,15 +69,14 @@ docker-engine:
 
 * Instalar Docker Engine:
 
-```
-$ sudo apt-get install -y docker-engine
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-get install -y docker-engine]
 ```
 
 * Verificar que docker engine se este ejecutando:
 
-```
-$ sudo systemctl status docker
-
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo systemctl status docker]
     docker.service - Docker Application Container Engine
        Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
        Active: active (running) since Sun 2017-10-22 12:55:02 -05; 5h 47min ago
@@ -88,8 +86,8 @@ $ sudo systemctl status docker
 
 * Se recomienda configurar el comando **docker** para ser usado sin la necesidad del somando sudo:
 
-```
-$ sudo usermod -aG docker $(whoami)
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo usermod -aG docker $(whoami)]
 ```
 
 Se debe reiniciar la sesión para que este cambio sea efectivo.
