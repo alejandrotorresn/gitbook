@@ -22,14 +22,16 @@ A continuación se detallan los pasos de la instalación:
 Reading package lists... Done
 ```
 
-```bash
-$ sudo apt-get update -y
-```
-
 * Agregar la clave GPG del repositorio oficial de Docker:
 
-```bash
-$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+]
+Executing: /tmp/apt-key-gpghome.QbF5xSF57C/gpg.1.sh --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+gpg: key F76221572C52609D: "Docker Release Tool (releasedocker) <docker@docker.com>" 1 new signature
+gpg: Total number processed: 1
+gpg:         new signatures: 1
 ```
 
 * Agregar el repositorio oficial de Docker a las repositorios de Ubuntu:
