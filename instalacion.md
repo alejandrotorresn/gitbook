@@ -15,13 +15,13 @@ A continuación se detallan los pasos de la instalación:
 
 * Actualización de la base de datos de los repositorios de Ubuntu.
 
-```
+```bash
 $ sudo apt-get update -y
 ```
 
 * Agregar la clave GPG del repositorio oficial de Docker:
 
-```
+```bash
 $ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 ```
 
