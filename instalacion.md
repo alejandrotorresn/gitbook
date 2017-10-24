@@ -42,6 +42,7 @@ Para Ubuntu 16.04
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main']
 ```
+
 Para Ubuntu 17.04
 
 ```
@@ -50,12 +51,14 @@ Para Ubuntu 17.04
 ```
 
 * Actualizar los repositorios de Ubuntu:
+
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-get update -y]
 ```
 
 * Verificar si el paquete de instalación de Docker proviene de los repositorios oficiales:
+
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command apt-cache policy docker-engine]
@@ -69,12 +72,14 @@ docker-engine:
 ```
 
 * Instalar Docker Engine:
+
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-get install -y docker-engine]
 ```
 
 * Verificar que docker engine se este ejecutando:
+
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo systemctl status docker]
@@ -86,6 +91,7 @@ docker-engine:
 ```
 
 * Se recomienda configurar el comando **docker** para ser usado sin la necesidad del somando sudo:
+
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo usermod -aG docker $(whoami)]
