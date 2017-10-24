@@ -17,8 +17,9 @@ A continuación se detallan los pasos de la instalación:
 
 ```
 **[terminal]
-**[prompt user@server]**[path ~]**[delimiter  $ ]**[command sudo apt-get update -y
-]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command sudo apt-get update -y]
+...
+Reading package lists... Done
 ```
 
 ```bash
