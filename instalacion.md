@@ -1,3 +1,5 @@
+<Alert.Info>Flash message goes here.</Alert.Info>
+
 # INSTALACIÓN DE DOCKER EN LINUX
 
 ## UBUNTU
