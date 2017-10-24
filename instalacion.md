@@ -15,6 +15,12 @@ A continuación se detallan los pasos de la instalación:
 
 * Actualización de la base de datos de los repositorios de Ubuntu.
 
+```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command sudo apt-get update -y
+]
+```
+
 ```bash
 $ sudo apt-get update -y
 ```
