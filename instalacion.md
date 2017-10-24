@@ -14,6 +14,7 @@ Existe la posibilidad que el paquete proporcionado por los repositorios de Ubunt
 A continuación se detallan los pasos de la instalación:
 
 * Actualización de la base de datos de los repositorios de Ubuntu.
+
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter  $ ]**[command sudo apt-get update -y]
@@ -40,6 +41,7 @@ Para Ubuntu 16.04
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main']
 ```
+
 Para Ubuntu 17.04
 
 ```
