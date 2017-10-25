@@ -10,7 +10,7 @@ Se implementaran los servicios de **MongoDB**, Servidores REST basados en **Eve*
 2. [Instalación de Docker Machine](/instalacion-de-docker-machine.md)
 3. Creación de las máquinas virtuales en _VirtualBox_ 
 
-**NOTA:** Los dos primeros requisitos pueden satisfacerse siguiendo los enlaces. No es necesario la instalación de _Docker Engine_ si se salta directamente a los nodos mediante **docker-machine ssh < node_name >** y no se usa **docker-machine env < node_name >** para conectar el cliente Docker al Docker Engine corriendo en la máquina virtual.
+**NOTA:** Los dos primeros requisitos pueden satisfacerse siguiendo los enlaces. No es necesario la instalación de _Docker Engine_ si se salta directamente a los nodos mediante **docker-machine ssh < node_name >** y no se usa **docker-machine env node_name** para conectar el cliente Docker al Docker Engine corriendo en la máquina virtual.
 
 ## CREACIÓN DE LAS MÁQUINAS VIRTUALES
 
