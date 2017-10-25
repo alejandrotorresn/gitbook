@@ -40,29 +40,31 @@ Al crear el nodo **manager1** se asigna una dirección IP a través del servicio
 
 ##### IP estática en una máquina creada por _docker-machine_ en Virtualbox:
 
-* ##### Obtener la IP asignada por _docker-machine_:
+* Obtener la IP asignada por _docker-machine_:
 
 ```
-$ docker-machine ip manager1
-
-    192.168.99.100
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ip manager1]
+192.168.99.100
 ```
 
 * Ingresar al nodo **manager1**:
 
 ```
-$ docker-machine ssh manager1
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh manager1]
 ```
 
 * Crear el archivo bootsync.sh
 
 ```
-$ sudo vi /var/lib/boot2docker/bootsync.sh
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command sudo vi /var/lib/boot2docker/bootsync.sh]
 ```
 
 * Ingresar el siguiente contenido en donde la dirección IP es la obtenida mediante el comando **docker-machine ip manager1**. Se debe tener en cuenta que la dirección del broadcast debe corresponder a la misma red de la IP.
 
-```
+```bash
 #!/bin/sh
 /etc/init.d/services/dhcp stop
 ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up
@@ -71,20 +73,23 @@ ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up
 * Asignarle los permisos adecuados al archivo _bootsync.sh_ y salir de la máquina virtual:
 
 ```
-$ sudo chmod 755 /var/lib/boot2docker/bootsync.sh
-$ exit
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command sudo chmod 755 /var/lib/boot2docker/bootsync.sh]
+**[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command exit]
 ```
 
 * Reiniciar el nodo **manager1**:
 
 ```
-$ docker-machine restart manager1
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine restart manager1]
 ```
 
 * Regenerar el certificado del nodo **manager1**:
 
 ```
-$ docker-machine regenerate-certs manager1
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine regenerate-certs manager1]
 ```
 
 ### CREAR UN SWARM
@@ -92,18 +97,28 @@ $ docker-machine regenerate-certs manager1
 * Ingresar al nodo **manager1**:
 
 ```
-$ docker-machien ssh manager1
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh manager1]
 ```
 
 * Inicializar el modo Swarm:
 
 ```
-$ docker swarm init --advertise-addr 192.168.99.100
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker swarm init --advertise-addr 192.168.99.100]
+Swarm initialized: current node (0ayliiwjtgo2i4i4npsw4kj0k) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
 La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm
 
-> docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
+> docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
+
 
 ### AGREGAR NODOS A SWARM
 
@@ -114,35 +129,41 @@ Para obtener el comando para incluir un worker al Swarm:
 * Ingresar al nodo manager \(**manager1**\):
 
 ```
-$ docker-machine ssh manager1
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh manager1]
 ```
 
 * Ejecutar el comando docker swarm join-token worker:
 
 ```
-$ docker swarm join-token worker
-
-        docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker swarm join-token worker]
+        docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
 ```
 
 * Salir de la máquina **manager1**:
 
 ```
-$ exit
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command exit]
 ```
 
 * Ingresar al nodo worker \(**worker1**\):
 
 ```
-$ docker-machine ssh worker1
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh worker1]
 ```
 
 * Agregar el nodo **worker1** al Swarm mediante la ejecución del comando retornado al inicializar el Swarm y salir de la máquina:
 
 ```
-$ docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
-$ exit
+**[terminal]
+**[prompt docker@worker1]**[path ~]**[delimiter  $ ]**[command docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
+This node joined a swarm as a worker.
+**[prompt docker@worker1]**[path ~]**[delimiter  $ ]**[command exit]
 ```
+
 
 **NOTA**: Para cada configuración se genera un token personalizado.
 
