@@ -20,14 +20,14 @@ Para esta guía se trabaja sobre el Swarm inicializado en los nodos creados en V
 
 * Ingresar al manager:
 
- ```
+```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh manager1]
 ```
 
 * Crear el servicio de Mongo:
  
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker service create mongo]
 ```
