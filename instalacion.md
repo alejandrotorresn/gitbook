@@ -38,14 +38,14 @@ gpg:         new signatures: 1
 
  Para Ubuntu 16.04
 
-  ```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main']
 ```
 
  Para Ubuntu 17.04
 
-  ```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-zesty main']
 ```
@@ -97,5 +97,5 @@ docker-engine:
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo usermod -aG docker $(whoami)]
 ```
 
-Se debe reiniciar la sesión para que este cambio sea efectivo.
+ Se debe reiniciar la sesión para que este cambio sea efectivo.
 
