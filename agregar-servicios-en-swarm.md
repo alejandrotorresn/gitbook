@@ -20,7 +20,7 @@ Para esta guía se trabaja sobre el Swarm inicializado en los nodos creados en V
 
 * Ingresar al manager:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh manager1]
 ```
