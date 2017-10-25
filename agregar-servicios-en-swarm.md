@@ -2,12 +2,34 @@
 
 [Docker swarm-services](https://docs.docker.com/engine/swarm/services/)
 
+## DESCRIPCIÓN DEL COMANDO DOCKER SERVICE CREATE
+
+```bash
+docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+
+[Descripción completa](https://docs.docker.com/engine/reference/commandline/service_create/)
+
+**NOTA**: La _IMAGE_ por lo general se descarga desde el repositorio de [DockerHub](https://hub.docker.com/), si esta no se encuentra en las imagenes almacenadas en el nodo en donde se ejecutara el servicio y su respectivo contenedor.
+
 ## CREAR UN SERVICIO
 
-Creación de un servicio con un única replica y sin ninguna configuración adicional. Este comando inicia el servicio de Nginx con un nombre aleatorio y sin publicar puertos.
+A continuación se muestra la creación de un servicio con un única replica y sin ninguna configuración adicional. Este comando inicia el servicio de MongoDB con un nombre aleatorio y sin publicar puertos.
 
+Para esta guía se trabaja sobre el Swarm inicializado en los nodos creados en VirtualBox.
+
+* Ingresar al manager:
+
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter  $ ]**[command docker-machine ssh manager1]
 ```
-$ docker service create nginx
+
+* Crear el servicio de Mongo:
+ 
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker service create mongo]
 ```
 
 Este servicio se levanta en un nodo del Swarm. Para verificar que el servicio fue creado e inicializado de forma correcta, se usa el siguiente comando:
