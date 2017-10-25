@@ -51,7 +51,6 @@ To see how to connect your Docker Client to the Docker Engine running on this vi
 
  **NOTA:** En la salida de la terminal puede observarse que no se encontro la imagen localmente y se procede a descargarla del repositorio de DockerHub-
 
-
 * Creación de los nodos Worker
 
  ```
@@ -71,6 +70,7 @@ Creating machine...
 ...
 To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env worker2
 ```
+
 ## CONFIGURACIÓN DE SWARM 
 
 ## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
