@@ -10,7 +10,7 @@ docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 [Descripción completa](https://docs.docker.com/engine/reference/commandline/service_create/)
 
-**NOTA**: La _IMAGE_ por lo general se descarga desde el repositorio de [DockerHub](https://hub.docker.com/), si esta no se encuentra en las imagenes almacenadas en el nodo en donde se ejecutara el servicio y su respectivo contenedor.
+**NOTA**: La _IMAGE_ por lo general se descarga desde el repositorio de [DockerHub](https://hub.docker.com/) si esta no se encuentra en las imagenes almacenadas en el nodo en donde se ejecutará el servicio y sus respectivos contenedores.
 
 ## CREAR UN SERVICIO
 
