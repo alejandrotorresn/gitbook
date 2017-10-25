@@ -10,7 +10,7 @@ docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 [Descripción completa](https://docs.docker.com/engine/reference/commandline/service_create/)
 
-**NOTA**: La _IMAGE_ por lo general se descarga desde el repositorio de [DockerHub](https://hub.docker.com/) si esta no se encuentra en las imagenes almacenadas en el nodo en donde se ejecutará el servicio y sus respectivos contenedores.
+**NOTA**: La _IMAGE_ por lo general se descarga desde el repositorio de [DockerHub](https://hub.docker.com/) si esta no se encuentra en las imagenes almacenadas en el nodo en donde se ejecutará el servicio y sus respectivos contenedores. Por tanto, si la imagen es personalizada (Creada desde un _Dockerfile_) se debe construir la imagen previamente en el nodo en donde se quiere ejecutar el servicio.
 
 ## CREAR UN SERVICIO
 
@@ -50,24 +50,21 @@ kky2r1fd5rje        elastic_allen       replicated          1/1                 
  
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ps _elastic_allen_]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ps elastic_allen]
 ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
 yjf4n8fk5876        elastic_allen.1     mongo:latest        manager1            Running             Running 5 minutes ago
 ```
 
  Al crear un servicio puede que no se ejecute de forma correcta. En _DESIRED STATE_ el estado puede quedarse en _PENDING_ si por ejemplo la imagen solicitada no es valida, si el nodo no reconoce los requisitos de configuración del servicio, etc.
+ 
+ **NOTA:** En el comando _docker service ps_ puede usarse tanto el nombre del servicio como su _ID_.
+
 
 **Para agragarle un nombre al servicio, se usa la bandera --flag**:
 
- ```
+```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name servidor_mongo mongo]
-```
-
-
-
-```
-$ docker service create --name my_web nginx
 ```
 
 **Para especificar un comando que el contenedor debe ejecutar, este se añado despues del nombre de la imagen**:
