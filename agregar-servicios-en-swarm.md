@@ -48,7 +48,7 @@ overall progress: 1 out of 1 tasks                          1/1: running
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node ls]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]
 ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
 kky2r1fd5rje        elastic_allen       replicated          1/1                 mongo:latest
 ```
