@@ -71,13 +71,11 @@ $ docker service update --publish-rm 80 my_web
 
 ## REMOVER UN SERVICIO
 
-Para remover un servicio se usa el comando **docker service remove**. El servicio puede ser removido usando su ID o su nombre, estos se muestran en la salida del comando **docker service ls**. 
+Para remover un servicio se usa el comando **docker service remove**. El servicio puede ser removido usando su ID o su nombre, estos se muestran en la salida del comando **docker service ls**.
 
 ```
 $ docker service remove my_web
 ```
-
-
 
 
 
