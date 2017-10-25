@@ -33,7 +33,6 @@ Creating machine...
 ...
 Docker is up and running!
 To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env worker1
-
 ```
 
 Al crear el nodo **manager1** se asigna una dirección IP a través del servicio DHCP. Se recomienda que este nodo tenga una dirección estática con el fin de que al reiniciar las máquinas no se pierda la conexión entre el manager y los workers.
@@ -119,7 +118,6 @@ La ejecucion del comando nos devuelve el comando necesario para agregar un nodo 
 
 > docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
 
-
 ### AGREGAR NODOS A SWARM
 
 #### UN NODO WORKER
@@ -145,7 +143,7 @@ Para obtener el comando para incluir un worker al Swarm:
 
 ```
 **[terminal]
-**[prompt user@server]**[path ~]**[delimiter  $ ]**[command exit]
+**[prompt user@manager1]**[path ~]**[delimiter  $ ]**[command exit]
 ```
 
 * Ingresar al nodo worker \(**worker1**\):
@@ -163,7 +161,6 @@ Para obtener el comando para incluir un worker al Swarm:
 This node joined a swarm as a worker.
 **[prompt docker@worker1]**[path ~]**[delimiter  $ ]**[command exit]
 ```
-
 
 **NOTA**: Para cada configuración se genera un token personalizado.
 
