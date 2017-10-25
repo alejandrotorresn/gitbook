@@ -30,20 +30,41 @@ Para esta guía se trabaja sobre el Swarm inicializado en los nodos creados en V
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker service create mongo]
+kky2r1fd5rjelfecpqj5tcfdd
+overall progress: 0 out of 1 tasks
+overall progress: 1 out of 1 tasks                          1/1: running
 ```
 
-Este servicio se levanta en un nodo del Swarm. Para verificar que el servicio fue creado e inicializado de forma correcta, se usa el siguiente comando:
+ Este servicio se levanta en un nodo del Swarm. Para verificar que el servicio fue creado e inicializado de forma correcta, se usa el siguiente comando:
 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node ls]
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+kky2r1fd5rje        elastic_allen       replicated          1/1                 mongo:latest
 ```
-$ docker node ls
 
-ID                  NAME                MODE                REPLICAS            IMAGE                                                                                             PORTS
-a3iixnklxuem        quizzical_lamarr    replicated          1/1                 docker.io/library/nginx@sha256:41ad9967ea448d7c2b203c699b429abe1ed5af331cd92533900c6d77490e0268
+ **NOTA:** El nombre del servicio (_elastic_allen_) fue asignado de forma automática. Más adelante se verá como asignarle un nombre personalizado.
+
+ Para observar mayor información sobre el servicio:
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ps _elastic_allen_]
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+yjf4n8fk5876        elastic_allen.1     mongo:latest        manager1            Running             Running 5 minutes ago
 ```
 
-Al crear un servicio puede que no se ejecute de forma correcta. Puede quedarse en estado pendiente si por ejemplo la imagen solicitada no es valida, si el nodo no reconoce los requisitos de configuración del servicio, etc.
+ Al crear un servicio puede que no se ejecute de forma correcta. En _DESIRED STATE_ el estado puede quedarse en _PENDING_ si por ejemplo la imagen solicitada no es valida, si el nodo no reconoce los requisitos de configuración del servicio, etc.
 
 **Para agragarle un nombre al servicio, se usa la bandera --flag**:
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name servidor_mongo mongo]
+```
+
+
 
 ```
 $ docker service create --name my_web nginx
