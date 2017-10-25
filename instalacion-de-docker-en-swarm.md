@@ -133,7 +133,7 @@ Para obtener el comando para incluir un worker al Swarm:
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker swarm join-token worker]
-        docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
+**[warning docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
 ```
 
 * Salir de la máquina **manager1**:
@@ -155,7 +155,7 @@ Para obtener el comando para incluir un worker al Swarm:
  ```
 **[terminal]
 **[prompt docker@worker1]**[path ~]**[delimiter  $ ]**[command docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
-This node joined a swarm as a worker.
+**[warning This node joined a swarm as a worker.]
 **[prompt docker@worker1]**[path ~]**[delimiter  $ ]**[command exit]
 ```
 
