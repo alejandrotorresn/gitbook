@@ -35,6 +35,7 @@ gpg:         new signatures: 1
 ```
 
 * Agregar el repositorio oficial de Docker a las repositorios de Ubuntu:
+
  Para Ubuntu 16.04
 
   ```
