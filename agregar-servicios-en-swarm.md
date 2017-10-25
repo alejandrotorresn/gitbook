@@ -14,9 +14,18 @@ docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 ## CREAR UN SERVICIO
 
-A continuación se muestra la creación de un servicio con un única replica y sin ninguna configuración adicional. Este comando inicia el servicio de MongoDB con un nombre aleatorio y sin publicar puertos.
-
 Para esta guía se trabaja sobre el Swarm inicializado en los nodos creados en VirtualBox.
+
+Los servicios en Docker ser crean en base a una imagen que puede estar Local (Nodo donde se ejecutará el servicio) o en el repositorio de DockerHub. Para listar las imagenes disponibles localmente, se debe ejecutar en el nodo correspondiente:
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker images]
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+mongo               <none>              42e262dc0845        2 weeks ago         361MB
+```
+
+A continuación se muestra la creación de un servicio **MongoDB** con un única replica y sin ninguna configuración adicional. Este comando inicia el servicio de MongoDB con un nombre aleatorio y sin publicar puertos.
 
 * Ingresar al manager:
 
@@ -62,60 +71,52 @@ yjf4n8fk5876        elastic_allen.1     mongo:latest        manager1            
 
 **Para agragarle un nombre al servicio, se usa la bandera --flag**:
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name servidor_mongo mongo]
-```
-
-**Para especificar un comando que el contenedor debe ejecutar, este se añado despues del nombre de la imagen**:
-
-```
-$ docker service create --name helloworld alpine ping docker.com
-```
-
-**alpine** es el nombre de la imagen y **ping docker.com** es el comando a ejecutar en esta imagen.
-
-**Para especificar una imagen particular a usar como servicio se puede agregar un tag despues del nombre de la misma**:
-
-```
-$ docker service create --name helloworld alpine:3.6 ping docker.com
 ```
 
 ## LISTAR SERVICIOS
 
 ```
-$ docker service ls
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]
 ```
 
 ## ACTUALIZAR UN SERVICIO
 
 Es posible actualizar cada parametro de un servicio existente usando el comando **docker service update**. Cuando se actualiza un servicio, docker detiene el contenedor y lo reinicia el servicio con la nueva configuración.
 
-Anteriormente se creo un servicio del servidor Nginx, pero no tiene expuesto el puerto 80 y por tanto no se es util en el mundo real. Al crear el servicio se puede especificar el puerto usando la bandera **-p** o **--publish**.
+Anteriormente se creo un servicio del servidor MongoDB, pero no tiene expuesto el puerto 27017 y por tanto no se es util en el mundo real. Al crear el servicio se puede especificar el puerto usando la bandera **-p** o **--publish**.
 
 ```
-$ docker service create --name my_web --publish 80 nginx
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name servidor_mongo --publish 27017:27017 mongo]
 ```
 
 Cuando se desea actualizar el servicio se debe usar la bandera **--publish-add**:
 
 ```
-$ docker service update --publish-add 80 my_web
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service update --publish-add 27017 servidor_mongo]
 ```
 
 Para remover un puerto previamente publicado se utiliza la bandera **--publish-rm**:
 
 ```
-$ docker service update --publish-rm 80 my_web
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service update --publish-rm 27017 servidor_mongo]
 ```
+**NOTA:** El último parámetro en el comando docker service update, es el nombre del servicio.
 
 ## REMOVER UN SERVICIO
 
 Para remover un servicio se usa el comando **docker service remove**. El servicio puede ser removido usando su ID o su nombre, estos se muestran en la salida del comando **docker service ls**.
 
 ```
-$ docker service remove my_web
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service remove servidor_mongo]
 ```
 
-
+**NOTA:** El último parámetro en el comando docker service update, es el nombre del servicio.
 
