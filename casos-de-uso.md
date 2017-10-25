@@ -1,25 +1,29 @@
-# CASOS DE USO - SWARM MODE
+# SWARM MODE - IMPLEMENTACIÓN EN ANÁLITICA DE DATOS
 
-Para los casos de uso se implementaran un solo nodo **manager **y tres nodos **worker**. Estos nodos se crearan mediante **docker-machine** y en _VirtualBox_.
+Para los casos de uso se implementará un solo nodo **manager **y dos nodos **workers** mediante **docker-machine** y en _VirtualBox_.
 
-Se implementaran los servicios de **MongoDB**, un servidor REST basado en **Eve **junto con una configuración personalizada de **Apache** que permite recibir archivos .gzip en el servicio REST y un contedor de **Analítica de Datos** \(Jupyter Notebook y Jupyter Lab\).
+Se implementaran los servicios de **MongoDB**, Servidores REST basados en **Eve** junto con una configuración personalizada de **Apache** que permite recibir archivos .gzip en el servicio REST y servicios **Analítica de Datos** \(Jupyter Notebook y Jupyter Lab\).
 
 ## REQUISITOS PREVIOS
 
 1. [Instalación de Docker Engine](/instalacion.md)
 2. [Instalación de Docker Machine](/instalacion-de-docker-machine.md)
 3. Creación de las máquinas virtuales en _VirtualBox_
-4. Creación del Swarm
+4. Configuración del Swarm
 5. Creación de las imagenes necesarias \(Eve y Analítica de Datos\)
 
-Los dos primeros requisitos pueden satisfacerse siguiendo el enlace.
+**NOTA:** Los dos primeros requisitos pueden satisfacerse siguiendo los enlaces. No es necesario la instalación de _Docker Engine_ si se salta directamente a los nodos mediante **docker-machine ssh < node_name >**.
 
-### CREACIÓN DE LAS MÁQUINAS VIRTUALES
+## CREACIÓN DE LAS MÁQUINAS VIRTUALES
 
 * Creación del nodo Manager \(Es recomendable asignarle un mínimo de 4GB de memoria al nodo manager\):
 
-```
-$ docker-machine create -d virtualbox --virtualbox-memory 4096 manager
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine create -d virtualbox --virtualbox-memory 4096 manager1]
+Running pre-create checks...
+Creating machine...
+...
 ```
 
 * Creación de los nodos Worker
@@ -29,6 +33,32 @@ $ docker-machine create -d virtualbox worker1
 $ docker-machine create -d virtualbox worker2
 $ docker-machine create -d virtualbox worker3
 ```
+
+
+
+## CONFIGURACIÓN DE SWARM 
+
+## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
+
+## CASOS DE USO
+
+
+
+
+### CASO DE USO BÁSICO - DESPLIEGUE DE SERVICIOS DE ANÁLITICA
+
+
+### CASOS DE USO - AVANZADO
+
+
+
+
+
+
+
+### CREACIÓN DE LAS MÁQUINAS VIRTUALES
+
+
 
 ### CREACIÓN DEL SWARM
 

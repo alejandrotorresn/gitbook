@@ -6,6 +6,6 @@
 * [Instalacion de Docker en Modo SWARM](instalacion-de-docker-en-swarm.md)
 * [Agregar Servicios a un Swarm](agregar-servicios-en-swarm.md)
 * [Administracion de nodos en Swarm](administracion-de-nodos-en-swarm.md)
-* [Casos de Uso - SWARM MODE](casos-de-uso.md)
+* [Swarm Mode - Implementación En Análitica de Datos](casos-de-uso.md)
 * [Red Overlay sin  Swarm](overlay-networking-sin-swarm.md)
 
