@@ -82,6 +82,8 @@ A continuación se muestra la creación de un servicio **MongoDB** con un única
 ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+sn1kydrjmzez        servidor_mongo      replicated          1/1                 mongo:latest
 ```
 
 ## ACTUALIZAR UN SERVICIO
