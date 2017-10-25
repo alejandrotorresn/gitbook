@@ -15,7 +15,7 @@ A continuación se detallan los pasos de la instalación:
 
 * Actualización de la base de datos de los repositorios de Ubuntu.
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter  $ ]**[command sudo apt-get update -y]
 ...
@@ -24,7 +24,7 @@ Reading package lists... Done
 
 * Agregar la clave GPG del repositorio oficial de Docker:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 ]
@@ -35,30 +35,30 @@ gpg:         new signatures: 1
 ```
 
 * Agregar el repositorio oficial de Docker a las repositorios de Ubuntu:
-Para Ubuntu 16.04
+ Para Ubuntu 16.04
 
-```
+  ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main']
 ```
 
-Para Ubuntu 17.04
+ Para Ubuntu 17.04
 
-```
+  ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-zesty main']
 ```
 
 * Actualizar los repositorios de Ubuntu:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-get update -y]
 ```
 
 * Verificar si el paquete de instalación de Docker proviene de los repositorios oficiales:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command apt-cache policy docker-engine]
 docker-engine:
@@ -72,14 +72,14 @@ docker-engine:
 
 * Instalar Docker Engine:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo apt-get install -y docker-engine]
 ```
 
 * Verificar que docker engine se este ejecutando:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo systemctl status docker]
     docker.service - Docker Application Container Engine
@@ -91,7 +91,7 @@ docker-engine:
 
 * Se recomienda configurar el comando **docker** para ser usado sin la necesidad del somando sudo:
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command sudo usermod -aG docker $(whoami)]
 ```
