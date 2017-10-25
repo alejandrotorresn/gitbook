@@ -107,7 +107,7 @@ ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up
 **[prompt docker@manager1]**[path ~]**[delimiter  $ ]**[command docker swarm init --advertise-addr 192.168.99.100]
 Swarm initialized: current node (0ayliiwjtgo2i4i4npsw4kj0k) is now a manager.
 To add a worker to this swarm, run the following command:
-**[warning [WARNING]docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
+**[warning docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
