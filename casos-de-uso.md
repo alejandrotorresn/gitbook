@@ -163,7 +163,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
  > docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
 
 ---
-**Agregar los nodos al Swarm**.
+**Agregar los nodos al Swarm**
 
 ---
 
@@ -187,7 +187,7 @@ Si por algún motivo no ha copiado el comando para incluir un nodo en el Swarm, 
 Repetir estos pasos para el nodo **worker2**.
 
 ---
-**Verificar que todos los nodos esten vinculados al Swarm.**
+**Verificar que todos los nodos esten vinculados al Swarm**
 
 ---
 
