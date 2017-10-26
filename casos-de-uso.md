@@ -164,51 +164,58 @@ Copiar la salida en el portapapeles.
 
 * Salir del nodo **manager**.
 
-```
-exit
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command exit]
 ```
 
 ---
-
 **Agregar los nodos al Swarm**.
+
+---
 
 Si por algún motivo no ha copiado el comando para incluir un nodo en el Swarm, puede obtenerlo ejecutando el comando **docker swarm join-token worker** dentro del nodo **manager**.
 
 * Ingresar al nodo **worker1**.
 
-```
-$ docker-machine ssh worker1
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh worker1]
 ```
 
 * Agregar el nodo **worker1** al Swarm ejecutando el comando que se genero a la salida de la inicialización del Swarm.
 
-```
-$ docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
+ ```
+**[terminal]
+**[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
 ```
 
 * Salir del nodo **worker1**.
 
-```
-$ exit
+ ```
+**[terminal]
+**[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command exit]
 ```
 
-Repetir estos pasos para los nodos **worker2 **y **worker3**.
+Repetir estos pasos para el nodo **worker2**.
+
+---
+**Verificar que todos los nodos esten vinculados al Swarm.**
 
 ---
 
-**Verificar que todos los nodos esten vinculados al Swarm.**
-
 * Ingresar al nodo **manager**.
 
-```
-$ docker-machine ssh manager
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
 
 * Listar los nodos del Swarm
 
 ```
-$ docker node ls
-
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node ls]
 ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
 ugr65ekld1jz2zggcqvigrayy * manager Ready Active Leader
 oaiz3i7pf2if28o014mx2xevn worker1 Ready Active
