@@ -306,6 +306,19 @@ ubuntu              latest              747cb2d60bbe        2 weeks ago         
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker build -t eve_apache .]
+Sending build context to Docker daemon  5.632kB
+Step 1/29 : FROM ubuntu
+ ---> 747cb2d60bbe
+ ...
+Step 28/29 : RUN echo "/usr/sbin/apache2 -D FOREGROUND" >> start.sh
+ ---> Running in b759cd0878e0
+ ---> ce4d17330893
+Step 29/29 : CMD ["sh","start.sh"]
+ ---> Running in 15d117d66f5b
+ ---> a3156b948c5e
+Removing intermediate container 2bace4da73c3
+Successfully built a3156b948c5e
+Successfully tagged eve_apache:latest 
 ```
 
 * Verificar que la imagen ha sido creada correctamente.
@@ -314,7 +327,6 @@ ubuntu              latest              747cb2d60bbe        2 weeks ago         
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker images]
 ```
-
 
 
 
