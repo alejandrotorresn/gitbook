@@ -203,11 +203,10 @@ Repetir estos pasos para el nodo **worker2**.
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node ls]
-ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
-ugr65ekld1jz2zggcqvigrayy * manager Ready Active Leader
-oaiz3i7pf2if28o014mx2xevn worker1 Ready Active
-d42j6agkb19vz4ccq3hhs8eqs worker2 Ready Active
-5tg1yrf3kqm6i28rkjso6hfgg worker3 Ready Active
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+2mlcvbq1jlvkzygogoxym86o2 *   manager1            Ready               Active              Leader
+9vzt9zkvye2na0udnvvt8k29d     worker1             Ready               Active              
+r9g23qn715xuemvvielc4nr8k     worker2             Ready               Active              
 ```
 
 ## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
