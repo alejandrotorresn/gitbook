@@ -251,8 +251,9 @@ El contenido debe ser similar al mostrado a continuación:
 Por el momento las imagenes solo seran creadas en el nodo **manger**. Posteriormente se vera que se debe tener la imagen base en donde desee crearse el servicio.
 
 ---
+**Creación de la imagen de Analitica de datos**
 
-**Creación de la imagen de Analitica de datos.**
+---
 
 De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(folder **Analytic\_eve**\).
 
