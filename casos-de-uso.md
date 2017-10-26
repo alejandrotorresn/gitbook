@@ -267,6 +267,16 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Analitica]**[delimiter $ ]**[command docker build -t analitica_datos .]
+Sending build context to Docker daemon  3.584kB
+Step 1/30 : from ubuntu
+ ---> 747cb2d60bbe
+ ...
+ Step 30/30 : CMD ["jupyter-lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--NotebookApp.token="]
+ ---> Running in 7269b31a62e5
+ ---> db974366bc12
+Removing intermediate container 242aaae16bcf
+Successfully built db974366bc12
+Successfully tagged analitica_datos:latest
 ```
 
 * Verificar que la imagen ha sido creada correctamente.
@@ -274,6 +284,9 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Analitica]**[delimiter $ ]**[command docker images]
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+analitica_datos     latest              db974366bc12        About a minute ago   3.19GB
+ubuntu              latest              747cb2d60bbe        2 weeks ago          122MB
 ```
 
 ---
