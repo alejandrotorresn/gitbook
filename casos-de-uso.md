@@ -253,27 +253,27 @@ El contenido debe ser similar al mostrado a continuación:
 
 ---
 
-De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(directorio **Analytic\_eve**\).
+De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(directorio **Analytic_eve**).
 
 * Ingresar al directorio Analitica
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic\_eve]**[delimiter $ ]**[command cd Analitica]
+**[prompt docker@manager1]**[path ~/Analytic_eve]**[delimiter $ ]**[command cd Analitica]
 ```
 
 * Construir la imagen.
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic\_eve/Analitica]**[delimiter $ ]**[command docker build -t analitica_datos .]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Analitica]**[delimiter $ ]**[command docker build -t analitica_datos .]
 ```
 
 * Verificar que la imagen ha sido creada correctamente.
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic\_eve/Analitica]**[delimiter $ ]**[command docker images]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Analitica]**[delimiter $ ]**[command docker images]
 ```
 
 ---
@@ -285,21 +285,21 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic\_eve]**[delimiter $ ]**[command cd Eve]
+**[prompt docker@manager1]**[path ~/Analytic_eve]**[delimiter $ ]**[command cd Eve]
 ```
 
 * Construir la imagen
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic\_eve/Eve]**[delimiter $ ]**[command docker build -t eve_apache .]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker build -t eve_apache .]
 ```
 
 * Verificar que la imagen ha sido creada correctamente.
 
 ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic\_eve/Eve]**[delimiter $ ]**[command docker images]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker images]
 ```
 
 
