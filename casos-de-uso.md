@@ -74,7 +74,7 @@ To see how to connect your Docker Client to the Docker Engine running on this vi
 
 Antes de crear el Swarm se recomienda establecer la dirección IP del nodo manager como dirección estática, para ello se debe:
 
-* Obtener la dirección dada por el servidor DHCP a la máquina **manager** creada por docker-machine.
+* Obtener la dirección dada por el servicio DHCP a la máquina **manager1** creada por docker-machine.
 
  ```
 **[terminal]
@@ -82,7 +82,7 @@ Antes de crear el Swarm se recomienda establecer la dirección IP del nodo manag
 **[warning 192.168.99.100]
 ```
 
-* Ingresar al nodo **manager**.
+* Ingresar al nodo **manager1**.
 
  ```
 **[terminal]
