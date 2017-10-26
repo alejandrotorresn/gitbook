@@ -104,7 +104,7 @@ Antes de crear el Swarm se recomienda establecer la dirección IP del nodo manag
 ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up
 ```
 
-Se debe tener en cuenta que la dirección IP ingresada en el archivo debe ser la misma que la obtenida con el comando _docker-machine ip manager_. De igual forma la dirección del broadcast debe concordar con la misma red.
+ Se debe tener en cuenta que la dirección IP ingresada en el archivo debe ser la misma que la obtenida con el comando _docker-machine ip manager_. De igual forma la dirección del broadcast debe concordar con la misma red.
 
 * Asignar los permisos adecuados al archivo _bootsync.sh_ y salir del nodo **manager1**.
 
