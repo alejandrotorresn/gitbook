@@ -328,8 +328,6 @@ Successfully tagged eve_apache:latest
 **[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker images]
 ```
 
-
-
 ---
 **Descarga de la Imagen de MongoDB**
 
