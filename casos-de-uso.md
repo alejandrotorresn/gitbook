@@ -135,14 +135,14 @@ Se debe tener en cuenta que la dirección IP ingresada en el archivo debe ser la
 ---
 
 
-* Ingresar al nodo **manager**.
+* Ingresar al nodo **manager1**.
 
  ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
 
-* Inicializar el modo Swarm y salirdel nodo.
+* Inicializar el modo Swarm y salir del nodo.
 
  ```
 **[terminal]
@@ -176,17 +176,11 @@ Si por algún motivo no ha copiado el comando para incluir un nodo en el Swarm, 
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh worker1]
 ```
 
-* Agregar el nodo **worker1** al Swarm ejecutando el comando que se genero a la salida de la inicialización del Swarm.
+* Agregar el nodo **worker1** al Swarm ejecutando el comando que se genero a la salida de la inicialización del Swarm y salir del nodo.
 
  ```
 **[terminal]
 **[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
-```
-
-* Salir del nodo **worker1**.
-
- ```
-**[terminal]
 **[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command exit]
 ```
 
