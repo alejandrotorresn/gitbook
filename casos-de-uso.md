@@ -47,7 +47,6 @@ Checking connection to Docker...
 Docker is up and running!
 To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env manager1
 ```
- **SALIDA DEL COMANDO DOCKER-MACHINE CREATE**
 
  **NOTA:** En la salida de la terminal puede observarse que no se encontro la imagen localmente y se procede a descargarla del repositorio de DockerHub-
 
@@ -73,105 +72,95 @@ To see how to connect your Docker Client to the Docker Engine running on this vi
 
 ## CONFIGURACIÓN DE SWARM 
 
-## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
-
-## CASOS DE USO
-
-
-
-
-### CASO DE USO BÁSICO - DESPLIEGUE DE SERVICIOS DE ANÁLITICA
-
-
-### CASOS DE USO - AVANZADO
-
-
-
-
-
-
-
-### CREACIÓN DE LAS MÁQUINAS VIRTUALES
-
-
-
-### CREACIÓN DEL SWARM
-
 Antes de crear el Swarm se recomienda establecer la dirección IP del nodo manager como dirección estática, para ello se debe:
 
-* Obtener la dirección dada por el servidor DHCP a la máquina **manager** creada por docker-machien.
+* Obtener la dirección dada por el servidor DHCP a la máquina **manager** creada por docker-machine.
 
-```
-$ docker-machine ip manager
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ip manager1]
+**[warning 192.168.99.100]
 ```
 
 * Ingresar al nodo **manager**.
 
-```
-$ docker-machine ssh manager
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
 
 * Crear el archivo **bootsync.sh**
 
-```
-$ sudo vi /var/lib/boot2docker/bootsync.sh
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo vi /var/lib/boot2docker/bootsync.sh]
 ```
 
 * Ingresar los siguientes comandos en el archivo bootsync.sh
 
-```
+```bash
 #!/bin/sh
 /etc/init.d/services/dhcp stop
 ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up
 ```
 
-Se debe tener en cuenta que dirección IP ingresada en el archivo debe ser la misma que la obtenida con el comando docker-machine ip manager. De igual forma la dirección del broadcast debe concordar con la misma red.
+Se debe tener en cuenta que dirección IP ingresada en el archivo debe ser la misma que la obtenida con el comando _docker-machine ip manager_. De igual forma la dirección del broadcast debe concordar con la misma red.
 
 * Asignar los permisos adecuados al archivo _bootsync.sh_ y salir del nodo **manager**.
 
-```
-$ sudo chmod 755 /var/lib/boot2docker/bootsync.sh
-```
-
-```
-$ exit
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo chmod 755 /var/lib/boot2docker/bootsync.sh]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command exit]
 ```
 
 * Reiniciar el nodo **manager**.
 
-```
-$ docker-machine restart manager
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine restart manager1]
 ```
 
 * Regenerar el certificado del nodo **manager**.
 
 ```
-$ docker-machine regenerate-certs manager
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine regenerate-certs manager1]
 ```
 
 ---
 
 **Inicialización del modo Swarm en el nodo manager.**
 
+---
+
+
 * Ingresar al nodo **manager**.
 
-```
-$ docker-machine ssh manager
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
 
 * Inicializar el modo Swarm.
 
-```
-$ docker swarm init --advertise-addr 192.168.99.100
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker swarm init --advertise-addr 192.168.99.100]
+Swarm initialized: current node (0ayliiwjtgo2i4i4npsw4kj0k) is now a manager.
+To add a worker to this swarm, run the following command:
+**[warning docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por tanto, debe especificarle la dirección IP que retorna el comando **docker-machine ip manager**.
+La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por lo tanto, debe especificarse la dirección IP que retorna el comando **docker-machine ip manager**.
 
 La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm.
 
 Copiar la salida en el portapapeles.
 
-> docker swarm join --token SWMTKN-1-61hpva2ixi24x1dzkfs61y7a5nwuuoq8c2n6onfdowg2knaphv-e8p88sf6r4x0407ek959rvgfj 192.168.99.100:2377
+> docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
+
 
 * Salir del nodo **manager**.
 
@@ -181,7 +170,7 @@ exit
 
 ---
 
-**Agregar los  nodos al Swarm**.
+**Agregar los nodos al Swarm**.
 
 Si por algún motivo no ha copiado el comando para incluir un nodo en el Swarm, puede obtenerlo ejecutando el comando **docker swarm join-token worker** dentro del nodo **manager**.
 
@@ -220,14 +209,14 @@ $ docker-machine ssh manager
 ```
 $ docker node ls
 
-ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-ugr65ekld1jz2zggcqvigrayy *   manager             Ready               Active              Leader
-oaiz3i7pf2if28o014mx2xevn     worker1             Ready               Active
-d42j6agkb19vz4ccq3hhs8eqs     worker2             Ready               Active
-5tg1yrf3kqm6i28rkjso6hfgg     worker3             Ready               Active
+ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
+ugr65ekld1jz2zggcqvigrayy * manager Ready Active Leader
+oaiz3i7pf2if28o014mx2xevn worker1 Ready Active
+d42j6agkb19vz4ccq3hhs8eqs worker2 Ready Active
+5tg1yrf3kqm6i28rkjso6hfgg worker3 Ready Active
 ```
 
-### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
+## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
 
 Ingresar al nodo **manager** del Swarm sino lo esta.
 
@@ -365,6 +354,29 @@ elh3v5ugfl5i        test_eve            replicated          1/1                 
 ![](/assets/Eve_test.png)La configuración básica del Servidor REST Eve pide un usuario y una contraseña. Por el momento no se han ingresado usuarios, por lo tanto el servidor Eve mostrara información como la mostrada en la imagen anterior.
 
 * Enviar información a Eve para verificar si esta recibiendo tanto archivos .json como .gzip
+
+
+
+## CASOS DE USO
+
+
+
+
+### CASO DE USO BÁSICO - DESPLIEGUE DE SERVICIOS DE ANÁLITICA
+
+
+### CASOS DE USO - AVANZADO
+
+
+
+
+
+
+
+
+
+### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
+
 
 ## CASO 1.
 
