@@ -323,7 +323,7 @@ Successfully tagged eve_apache:latest
 
 * Verificar que la imagen ha sido creada correctamente.
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker images]
 ```
