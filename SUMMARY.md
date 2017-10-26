@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [Introducción](README.md)
 * [Instalación de Docker en Linux](instalacion.md)
 * [Instalación de Docker Machine en Linux](instalacion-de-docker-machine.md)
 * [Instalacion de Docker en Modo SWARM](instalacion-de-docker-en-swarm.md)

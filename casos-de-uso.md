@@ -191,7 +191,7 @@ Repetir estos pasos para el nodo **worker2**.
 
 ---
 
-* Ingresar al nodo **manager**.
+* Ingresar al nodo **manager1**.
 
  ```
 **[terminal]
@@ -211,37 +211,39 @@ r9g23qn715xuemvvielc4nr8k     worker2             Ready               Active
 
 ## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
 
-Ingresar al nodo **manager** del Swarm sino lo esta.
+
+Ingresar al nodo **manager1** del Swarm sino lo esta.
 
 ```
-$ docker-machine ssh manager
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
 
 Los archivos Dockerfile que contienen la creación de estas dos imagenes se encuentran en GitHub. Para descargarlos ejecutar:
 
 ```
-$ git clone https://github.com/alejandrotorresn/Analytic_eve.git
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command git clone https://github.com/alejandrotorresn/Analytic_eve.git]
 ```
 
 El contenido debe ser similar al mostrado a continuación:
 
-```
-├── Eve
-│   ├── 000-default.conf
-│   ├── Dockerfile
-│   ├── run.py
-│   ├── settings.py
-│   ├── user1
+```bash
+├── Analitica
+│   └── Dockerfile
+├── Customers
+│   ├── customer1
 │   │   ├── insert.json
 │   │   ├── insert.json.gz
 │   │   ├── run.py
 │   │   └── settings.py
-│   └── user2
+│   └── customer2
 │       ├── insert.json
 │       ├── insert.json.gz
 │       ├── run.py
 │       └── settings.py
-├── miniconda_p27
+├── Eve
+│   ├── 000-default.conf
 │   └── Dockerfile
 └── README.md
 ```
