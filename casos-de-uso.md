@@ -248,32 +248,76 @@ El contenido debe ser similar al mostrado a continuación:
 └── README.md
 ```
 
-Por el momento las imagenes solo seran creadas en el nodo **manger**. Posteriormente se vera que se debe tener la imagen base en donde desee crearse el servicio.
-
 ---
 **Creación de la imagen de Analitica de datos**
 
 ---
 
-De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(folder **Analytic\_eve**\).
+De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(directorio **Analytic\_eve**\).
 
-* Ingresar al directorio miniconda\_p27
+* Ingresar al directorio Analitica
 
-```
-$ cd miniconda_p27
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analitica]
 ```
 
 * Construir la imagen.
 
-```
-$ docker build -t analitica_datos .
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker build -t analitica_datos .]
 ```
 
 * Verificar que la imagen ha sido creada correctamente.
 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker images]
+```
+
+---
+**Creación de la Imagen del servicio REST - Eve**
+
+---
+
+
+* Ingrese al directorio Eve
+
+```
+$ cd Eve
+```
+
+* Construir la imagen
+
+```
+$ docker build -t eve_apache .
+```
+
+Verificar que la imagen ha sido creada correctamente.
+
 ```
 $ docker images
 ```
+
+
+---
+**Descarga de la Imagen de MongoDB**
+
+---
+
+
+
+---
+**Creación del Repositorio Local de Imagenes**
+
+---
+
+
+
+
+
+
 
 * Verificar que puede ejecutarse el servicio de **Análitica de Datos**.
 
@@ -300,27 +344,9 @@ ye8ngif9e4qe        test_analitica      replicated          1/1                 
 $ docker service rm test_analitica
 ```
 
----
 
-**Creación de la Imagen del servicio REST - Eve**
 
-* Ingrese al directorio Eve
 
-```
-$ cd Eve
-```
-
-* Construir la imagen
-
-```
-$ docker build -t eve_apache .
-```
-
-Verificar que la imagen ha sido creada correctamente.
-
-```
-$ docker images
-```
 
 * Para evaluar el servicio de Eve se debe tener el servicio de **MongoDB** en funcionamiento, para ello se ejecuta:
 
