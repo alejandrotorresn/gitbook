@@ -123,14 +123,14 @@ Se debe tener en cuenta que dirección IP ingresada en el archivo debe ser la mi
 
 * Regenerar el certificado del nodo **manager**.
 
-```
+ ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine regenerate-certs manager1]
 ```
 
 ---
 
-**Inicialización del modo Swarm en el nodo manager.**
+**Inicialización del modo Swarm en el nodo manager**
 
 ---
 
@@ -149,17 +149,17 @@ Se debe tener en cuenta que dirección IP ingresada en el archivo debe ser la mi
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker swarm init --advertise-addr 192.168.99.100]
 Swarm initialized: current node (0ayliiwjtgo2i4i4npsw4kj0k) is now a manager.
 To add a worker to this swarm, run the following command:
-**[warning docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
+**[warning      docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377]
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
 
-La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por lo tanto, debe especificarse la dirección IP que retorna el comando **docker-machine ip manager**.
+ La IP debe colocarse debido a que la máquina virtual creada por docker-machine en VirtualBox contiene varias interfaces de red y varias direcciones IP.  Por lo tanto, debe especificarse la dirección IP que retorna el comando **docker-machine ip manager**.
 
-La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm.
+ La ejecucion del comando nos devuelve el comando necesario para agregar un nodo al Swarm.
 
-Copiar la salida en el portapapeles.
+ Copiar la salida en el portapapeles.
 
-> docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
+ > docker swarm join --token SWMTKN-1-0e9r5688ui3q2hdkm7xzal4o83bktaeiuo8jetljp4z0povphj-9era17h2lj5493xt4knb38o7t 192.168.99.100:2377
 
 
 * Salir del nodo **manager**.
