@@ -249,7 +249,7 @@ El contenido debe ser similar al mostrado a continuación:
 ```
 
 ---
-**Creación de la imagen de Analitica de datos**
+**Creación de la Imagen de Analítica de Datos**
 
 ---
 
@@ -259,46 +259,50 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analitica]
+**[prompt docker@manager1]**[path ~/Analytic\_eve]**[delimiter $ ]**[command cd Analitica]
 ```
 
 * Construir la imagen.
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker build -t analitica_datos .]
+**[prompt docker@manager1]**[path ~/Analytic\_eve/Analitica]**[delimiter $ ]**[command docker build -t analitica_datos .]
 ```
 
 * Verificar que la imagen ha sido creada correctamente.
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker images]
+**[prompt docker@manager1]**[path ~/Analytic\_eve/Analitica]**[delimiter $ ]**[command docker images]
 ```
 
 ---
-**Creación de la Imagen del servicio REST - Eve**
+**Creación de la Imagen del Servicio REST - Eve**
 
 ---
-
 
 * Ingrese al directorio Eve
 
-```
-$ cd Eve
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic\_eve]**[delimiter $ ]**[command cd Eve]
 ```
 
 * Construir la imagen
 
-```
-$ docker build -t eve_apache .
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic\_eve/Eve]**[delimiter $ ]**[command docker build -t eve_apache .]
 ```
 
-Verificar que la imagen ha sido creada correctamente.
+* Verificar que la imagen ha sido creada correctamente.
 
 ```
-$ docker images
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic\_eve/Eve]**[delimiter $ ]**[command docker images]
 ```
+
+
 
 
 ---
