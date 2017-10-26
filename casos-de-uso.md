@@ -213,7 +213,7 @@ Repetir estos pasos para el nodo **worker2**.
 
 * Listar los nodos del Swarm
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node ls]
 ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
