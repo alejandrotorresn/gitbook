@@ -332,6 +332,7 @@ Successfully tagged eve_apache:latest
 **Descarga de la Imagen de MongoDB**
 
 ---
+
 ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image pull mongo]
@@ -349,7 +350,82 @@ Status: Downloaded newer image for mongo:latest
 
 Para la creación del repositorio local se usará _[Docker Registry](https://docs.docker.com/registry/)_; es un servidor _stateless_ que almacena y permite distribuir imagenes de Docker. En otras palabras, permite crear un repositorio local de imagenes que todos pueden acceder sin necesidad de contruir una nueva imagen o descargarla de DockerHub.
 
-* 
+* Ejecutar el servicio.
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name registry --publish 5000:5000 registry:2]
+j0961u4mqk6krwur9f2x4qo2n
+overall progress: 1 out of 1 tasks 
+1/1: running   [==================================================>] 
+verify: Service converged 
+```
+
+* Listar las imagenes.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image ls]
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+eve_apache          latest              a3156b948c5e        2 hours ago         529MB
+analitica_datos     latest              db974366bc12        4 hours ago         3.19GB
+mongo               latest              a28fdc58a538        19 hours ago        361MB
+registry            <none>              2ba7189700c8        22 hours ago        33.3MB
+ubuntu              latest              747cb2d60bbe        2 weeks ago         122MB
+```
+
+* Etiquetar las imagenes con una etiqueta adicional donde se especifique el hostname y el puerto. Docker automáticamente interpreta que esta es la ubicación del _registry_.
+ 
+ Para el repositorio de Análitica solo se etiquetaran las imagenes de eve_apache, analitica_datos y mongo.
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker tag eve_apache localhost:5000/eve_apache]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker tag analitica_datos localhost:5000/analitica_datos]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker tag mongo localhost:5000/mongo]
+```
+
+* Listar las imagenes para ver que se han reetiquetado correctamente.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker images]
+REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
+eve_apache                       latest              a3156b948c5e        3 hours ago         529MB
+localhost:5000/eve_apache        latest              a3156b948c5e        3 hours ago         529MB
+analitica_datos                  latest              db974366bc12        4 hours ago         3.19GB
+localhost:5000/analitica_datos   latest              db974366bc12        4 hours ago         3.19GB
+mongo                            latest              a28fdc58a538        20 hours ago        361MB
+localhost:5000/mongo             latest              a28fdc58a538        20 hours ago        361MB
+registry                         <none>              2ba7189700c8        22 hours ago        33.3MB
+ubuntu                           latest              747cb2d60bbe        2 weeks ago         122MB
+```
+
+* Subir las imagenes la _registry_ local que se encuentra corriendo en localhost:5000.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker push localhost:5000/eve_apache]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker push localhost:5000/analitica_datos]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker push localhost:5000/mongo]
+```
+
+* Asegurarse que las imagenes han sido cargadas al repositorio local.
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command curl localhost:5000/v2/_catalog]
+{"repositories":["analitica_datos","eve_apache","mongo"]}
+```
+
+
+
+
+
+
+
+
+
 
 
 
