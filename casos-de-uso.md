@@ -511,8 +511,7 @@ local               mongodata
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --replicas 1 --network services_overlay --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --cons
-traint 'node.hostname == manager1' --name mongo_eve localhost:5000/mongo]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --replicas 1 --network services_overlay --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' --name mongo_eve localhost:5000/mongo]
 ```
 
 
