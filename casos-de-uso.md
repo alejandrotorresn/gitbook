@@ -348,7 +348,7 @@ Status: Downloaded newer image for mongo:latest
 
 ---
 
-Para la creación del repositorio local se usará _[Docker Registry](https://docs.docker.com/registry/)_; es un servidor _stateless_ que almacena y permite distribuir imagenes de Docker. En otras palabras, permite crear un repositorio local de imagenes que todos pueden acceder sin necesidad de contruir una nueva imagen o descargarla de DockerHub.
+Para la creación del repositorio local se usará _[Docker Registry](https://docs.docker.com/registry/)_; es un servidor _stateless_ que almacena y permite distribuir imagenes de Docker. En otras palabras, permite crear un repositorio local de imagenes que todos pueden acceder sin necesidad de construir una nueva imagen o descargarla de DockerHub.
 
 * Ejecutar el servicio.
  
@@ -438,6 +438,54 @@ ubuntu                           latest              747cb2d60bbe        2 weeks
 
 ## CASOS DE USO
 
+Los casos de uso se dividen en dos en donde la primera parte abordará el despliegue básico de los servicios de MongoDB, Eve y Analítica de datos. En la segunda parte se desplegarán los servicios en situaciones particulares con el fin de mostrar la versatilidad de los servicios.
+
+### CASO DE USO BÁSICO - DESPLIEGUE DE SERVICIOS DE ANÁLITICA
+
+Para este caso de uso se despliegan los servicios de MongoDB, Eve y Analítica de Datos para un solo _Customer_ y en un único nodo (**manager1**). Cabe recordar que la infraestructura creada para estos casos de uso cuenta con un nodo **manager** y dos nodos **workers**, por lo tanto, en el comando de la creación de los servicios se especificará el nodo donde se desplegarán los servicios. Si la infraestructura solo contara con un solo nodo (nodo **manager**) no sería necesario esta especificación (los nodos **manager** tambien funcionan con nodos **workers**, al menos que se especifique lo contrario).
+
+Para desplegar el primer caso de uso, se debe:
+
+* Ingresar al nodo **manager1** del Swarm sino lo esta.
+
+ ```
+**[terminal]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
+```
+
+* Descargar los archivos de ejemplo desde el repositorio de GitHub.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command git clone https://github.com/alejandrotorresn/Analytic_eve.git]
+```
+
+* Ingresar a la carpeta Analytic_eve/Customers.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analytic_eve/Customers]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers]**[delimiter $ ]**[command ls]
+**[warning customer1/ customer2/]
+```
+
+* Dentro se encuentran dos carpetas con los archivos de configuración para levantar el servicio del servidor REST construido con Eve (run.py y settings.py). Además, se encuentran otros dos archivos con contenido de ejemplo para insertar en la base de datos usando el servidor Eve (insert.json y insert.json.gz).
+
+* Ingresar a la carpeta customer1.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers]**[delimiter $ ]**[command cd customer1]
+```
+
+* 
+---
+
+
+
+
+
+
 
 * Verificar que puede ejecutarse el servicio de **Análitica de Datos**.
 
@@ -502,7 +550,6 @@ elh3v5ugfl5i        test_eve            replicated          1/1                 
 
 
 
-### CASO DE USO BÁSICO - DESPLIEGUE DE SERVICIOS DE ANÁLITICA
 
 
 ### CASOS DE USO - AVANZADO
@@ -512,13 +559,6 @@ elh3v5ugfl5i        test_eve            replicated          1/1                 
 
 
 
-
-
-
-### CREACIÓN DE LAS IMAGENES EVE Y ANALITICA DE DATOS
-
-
-## CASO 1.
 
 servicios a correr
 
