@@ -528,7 +528,7 @@ local               mongodata
 **Despliegue del servicio de Eve**
 
 ---
-* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que solo crea contendores con sistemas de archivos de solo lectura.
+* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que solo crea contendores con sistemas de archivos de solo lectura y al apagar o reiniciar los nodos la información allí almacenada se perderá.
 
  ```
 **[terminal]
@@ -555,7 +555,7 @@ local               mongodata
 
 * Lanzar el servicio de Eve:
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command ]
 ```
