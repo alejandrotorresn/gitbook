@@ -436,6 +436,32 @@ ubuntu                           latest              747cb2d60bbe        2 weeks
 ...
 ```
 
+---
+**Creación de la Red Overlay para los Servicios**
+
+---
+
+La red Overlay permite a los servicios comunicarse entre ellos. Con esto los servicios no necesitan conocer la IP ni el nombre del nodo en donde se encuentra alojado el contenedor que los esta ejecutando. En otras palabras, los servicios puede comunicarse gracias a un servicio de DNS de Docker en modo Swarm mediante una red Overlay.
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker network create -d overlay services_overlay]
+```
+
+Para ver la nueva red creada, ejecutar:
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker network ls]
+NETWORK ID          NAME                DRIVER              SCOPE
+28d8d60ce1a8        bridge              bridge              local
+2ea2660bf2f8        docker_gwbridge     bridge              local
+672e15f6fe15        host                host                local
+tjjxkttc4joh        ingress             overlay             swarm
+92334a23b2e2        none                null                local
+**[warning 0i28klyx8qiq        services_overlay    overlay             swarm]
+```
+
 ## CASOS DE USO
 
 Los casos de uso se dividen en dos en donde la primera parte abordará el despliegue básico de los servicios de MongoDB, Eve y Analítica de datos. En la segunda parte se desplegarán los servicios en situaciones particulares con el fin de mostrar la versatilidad de los servicios.
@@ -452,7 +478,38 @@ Para desplegar el primer caso de uso, se debe:
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
+---
+**Despliegue del servicio de MongoDB**
 
+---
+
+* [Creación de los volumenes en Docker](https://docs.docker.com/engine/admin/volumes/volumes/) para el almacenamiento de los datos y archivos de configuración. Se debe tener en cuenta que la creación de los volumenes se hace solo en el nodo donde se ejecutan los comandos. De forma nativa Docker no comparte estos volumenes ni su contenido, por lo tanto, los volumenes se deben crear en el nodo en donde se desea ejecutar el servicio de MongoDB y si se desea sincronizar su contenido se dede implementar algún servicio como NFS, GlusterNF, etc.
+
+ Para este caso de uso se implementa MongoDB en un solo nodo y sus volumenes se crearán en el nodo donde se despliega el servicio.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongodata]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongoconfig]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume ls]
+DRIVER              VOLUME NAME
+local               mongoconfig
+local               mongodata
+```
+
+* Ejecutar el servicio de MongoDB.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command ]
+```
+
+
+
+---
+**Despliegue del servicio de Eve**
+
+---
 * Descargar los archivos de ejemplo desde el repositorio de GitHub.
 
  ```
@@ -478,7 +535,14 @@ Para desplegar el primer caso de uso, se debe:
 **[prompt docker@manager1]**[path ~/Analytic_eve/Customers]**[delimiter $ ]**[command cd customer1]
 ```
 
-* 
+* Lanzar el servicio de Eve:
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command ]
+```
+
+
 ---
 
 
