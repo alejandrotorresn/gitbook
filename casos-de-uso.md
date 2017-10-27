@@ -332,16 +332,24 @@ Successfully tagged eve_apache:latest
 **Descarga de la Imagen de MongoDB**
 
 ---
-
-
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image pull mongo]
+Using default tag: latest
+latest: Pulling from library/mongo
+...
+Digest: sha256:39a5ddbed305b7a0d90e1c8c777f43680bafeb982135f775c22fb0f901b67f98
+Status: Downloaded newer image for mongo:latest
+```
 
 ---
 **Creación del Repositorio Local de Imagenes**
 
 ---
 
+Para la creación del repositorio local se usará _[Docker Registry](https://docs.docker.com/registry/)_; es un servidor _stateless_ que almacena y permite distribuir imagenes de Docker. En otras palabras, permite crear un repositorio local de imagenes que todos pueden acceder sin necesidad de contruir una nueva imagen o descargarla de DockerHub.
 
-
+* 
 
 
 
