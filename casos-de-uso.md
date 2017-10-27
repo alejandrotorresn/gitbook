@@ -412,22 +412,31 @@ ubuntu                           latest              747cb2d60bbe        2 weeks
 
 * Asegurarse que las imagenes han sido cargadas al repositorio local.
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command curl localhost:5000/v2/_catalog]
-{"repositories":["analitica_datos","eve_apache","mongo"]}
+**[warning {"repositories":["analitica_datos","eve_apache","mongo"]}]
 ```
 
+* Puede remover las imagenes locales sin afectar las imagenes que ya se han cagador al _registry_.
 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove eve_apache]
+...
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove localhost:5000/eve_apache]
+...
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove analitica_datos]
+...
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove localhost:5000/analitica_datos]
+...
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove mongo]
+...
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove localhost:5000/mongo]
+...
+```
 
-
-
-
-
-
-
-
-
+## CASOS DE USO
 
 
 * Verificar que puede ejecutarse el servicio de **Análitica de Datos**.
@@ -489,8 +498,6 @@ elh3v5ugfl5i        test_eve            replicated          1/1                 
 * Enviar información a Eve para verificar si esta recibiendo tanto archivos .json como .gzip
 
 
-
-## CASOS DE USO
 
 
 
