@@ -401,7 +401,7 @@ registry                         <none>              2ba7189700c8        22 hour
 ubuntu                           latest              747cb2d60bbe        2 weeks ago         122MB
 ```
 
-* Subir las imagenes la _registry_ local que se encuentra corriendo en localhost:5000.
+* Subir las imagenes al _registry_ local que se encuentra corriendo en localhost:5000.
 
  ```
 **[terminal]
