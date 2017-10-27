@@ -350,11 +350,21 @@ Status: Downloaded newer image for mongo:latest
 
 Para la creación del repositorio local se usará _[Docker Registry](https://docs.docker.com/registry/)_; es un servidor _stateless_ que almacena y permite distribuir imagenes de Docker. En otras palabras, permite crear un repositorio local de imagenes que todos pueden acceder sin necesidad de construir una nueva imagen o descargarla de DockerHub.
 
+* Crear el volumen para almacenar las imagenes. El servicio de _registry_ se ejecutara en el nodo **manager1** por tanto el volumen se creará en este nodo.
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name registry]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume ls]
+DRIVER VOLUME NAME
+local registry
+```
+
 * Ejecutar el servicio.
  
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name registry --publish 5000:5000 registry:2]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name registry --publish 5000:5000 --mount type=volume,source=registry,target=/var/lib/registry registry:2]
 j0961u4mqk6krwur9f2x4qo2n
 overall progress: 1 out of 1 tasks 
 1/1: running   [==================================================>] 
@@ -501,7 +511,8 @@ local               mongodata
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command ]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --replicas 1 --network services_overlay --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --cons
+traint 'node.hostname == manager1' --name mongo_eve localhost:5000/mongo]
 ```
 
 
