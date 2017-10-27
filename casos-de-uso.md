@@ -364,7 +364,7 @@ local registry
  
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name registry --publish 5000:5000 --mount type=volume,source=registry,target=/var/lib/registry registry:2]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name registry --constraint 'node.hostname == manager1'  --publish 5000:5000 --mount type=volume,source=registry,target=/var/lib/registry registry:2]
 j0961u4mqk6krwur9f2x4qo2n
 overall progress: 1 out of 1 tasks 
 1/1: running   [==================================================>] 
