@@ -14,6 +14,8 @@ Se implementaran los servicios de **MongoDB**, Servidores REST basados en **Eve*
 
 ## CREACIÓN DE LAS MÁQUINAS VIRTUALES
 
+Docker-machine usa la imagen **boot2docker** para crear las máquinas virtuales la cual crea contenedores con sistemas de archivos de solo lectura y por tanto, cada vez que se reinicie un nodo, todos los datos almacenados en este se perderán. Para asegurar la persistencia de los datos se hace necesario la creación de [volumenes](https://docs.docker.com/engine/admin/volumes/volumes/).
+
 * Creación del nodo Manager \(Es recomendable asignarle un mínimo de 4GB de memoria al nodo manager\):
 
  ```
@@ -352,7 +354,7 @@ Para la creación del repositorio local se usará _[Docker Registry](https://doc
 
 * Crear el volumen para almacenar las imagenes. El servicio de _registry_ se ejecutara en el nodo **manager1** por tanto el volumen se creará en este nodo.
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name registry]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume ls]
@@ -514,13 +516,19 @@ local               mongodata
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --replicas 1 --network services_overlay --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' --name mongo_eve localhost:5000/mongo]
 ```
 
+* Verificar que el servicio de MongoDB (mongo_eve) se encuentre en ejecución.
 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service inspect --pretty mongo]
+```
 
 ---
 **Despliegue del servicio de Eve**
 
 ---
-* Descargar los archivos de ejemplo desde el repositorio de GitHub.
+* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que solo crea contendores con sistemas de archivos de solo lectura.
 
  ```
 **[terminal]
