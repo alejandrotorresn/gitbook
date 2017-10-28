@@ -620,8 +620,8 @@ local               mongodata
  Content-Type: application/json
  Content-Length: 275
  Location: http://192.168.99.100:6001/user/59f3dd0019e7de0005a1e238
-**[warning * Connection #0 to host 192.168.99.100 left intact
-{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "_status": "OK", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}}]
+ Connection #0 to host 192.168.99.100 left intact 
+**[warning {"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "_status": "OK", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}}]
 ```
 
  **NOTA:** Para este ejemplo se usa un usuario administrador que permite el envío de información a la base de datos (**user:**admin1, **password:**admin1). Este usuario se encuentra especifícado dentro del archivo _run.py_.
