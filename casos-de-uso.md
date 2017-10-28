@@ -581,7 +581,7 @@ local               mongodata
 **[warning {"_links": {"child": [{"href": "user", "title": "user"}]}}]
 ```
 
- La respuesta a la petición muestra que existe un _child_ **user** al cual podemos ingresar o consultar información, pero por el momento la Base de datos _customer1_db_ no contiene ninguna. La razón de ello es porque aún no se ha hecho la primera carga de datos. Si se consulta este podra verse la siguiente respuesta:
+ La respuesta a la petición muestra que existe un _child_ **user** al cual podemos ingresar a consultar información, pero por el momento la Base de datos _customer1_db_ no contiene ninguna. La razón de ello es porque aún no se ha hecho la primera carga de datos. Si se consulta este podra verse la siguiente respuesta:
 
  ```
 **[terminal]
