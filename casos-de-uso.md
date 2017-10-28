@@ -484,9 +484,9 @@ Para este caso de uso se despliegan los servicios de MongoDB, Eve y Analítica d
 
 Para desplegar el primer caso de uso, se debe:
 
-* Ingresar al nodo **manager1** del Swarm sino lo esta.
+Ingresar al nodo **manager1** del Swarm sino lo esta.
 
- ```
+```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
@@ -513,22 +513,31 @@ local               mongodata
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --replicas 1 --network services_overlay --publish 27017:27017 --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' --name mongo_eve localhost:5000/mongo]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name mongo_eve  --replicas 1 --network services_overlay --publish 27017:27017 --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' localhost:5000/mongo]
 ```
 
+ ** Descripción de los parámetros del servicio de Mongo**
+ - --name: Nombre del Servicio
+ - --replicas: Número de espejos o replicas del servicio
+ - --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
+ - --publish: Puerto a mapear. (Número de puerto del Swarm: Número de puerto del servicio)
+ - --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio
+ - --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio  
+ 
 * Verificar que el servicio de MongoDB (mongo_eve) se encuentre en ejecución.
 
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service inspect --pretty mongo]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service inspect --pretty mongo_eve]
 ```
 
 ---
 **Despliegue del servicio de Eve**
 
 ---
-* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que solo crea contendores con sistemas de archivos de solo lectura y al apagar o reiniciar los nodos la información allí almacenada se perderá.
+
+* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager1**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que solo crea contendores con sistemas de archivos de solo lectura y al apagar o reiniciar los nodos la información allí almacenada se perderá.
 
  ```
 **[terminal]
@@ -557,15 +566,38 @@ local               mongodata
 
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command ]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command docker service create --name eve_customer1 --replicas 1 --network services_overlay --publish 6001:80 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --mount type=bind,source=/home/docker/Analytic_eve/Customers/customer1,destination=/home/eve  --constraint 'node.hostname == manager1' localhost:5000/eve_apache]
+```
+
+ ** Descripción de los parámetros del servicio de Eve**
+ - --name: Nombre del servicio
+ - --replicas: Número de espejos o replicas del servicio
+ - --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
+ - --publish: uerto a mapear. (Número de puerto del Swarm: Número de puerto del servicio) 
+ - --env: El servicio de Eve requiere de tres variables de ambiente; MONGO_HOST: Nombre del servicio de MongoDB, MONGO_PORT: Puerto de Mongo (Puerto 27017 por defecto) y MONGO_DBNAME: Nombre de la base de datos del customer1.
+ - --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para el caso de Eve se monta el directorio que contiene los archivos _run.py_ y _setting.py_ necesarios para inicializar el servicio.
+ - --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
+ 
+ * Verificar que el servidor Eve se encuentre en ejecución.
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u null:null http://192.168.99.100:6001]
+[warning {"_links": {"child": [{"href": "user", "title": "user"}]}}]
 ```
 
 
+
+
+ 
+
+
+
+
+
+
+
 ---
-
-
-
-
 
 
 
