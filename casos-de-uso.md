@@ -567,7 +567,7 @@ local               mongodata
  - --name: Nombre del servicio
  - --replicas: Número de espejos o replicas del servicio
  - --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
- - --publish: uerto a mapear. (Número de puerto del Swarm: Número de puerto del servicio) 
+ - --publish: Puerto a mapear. (Número de puerto del Swarm: Número de puerto del servicio) 
  - --env: El servicio de Eve requiere de tres variables de ambiente; MONGO_HOST: Nombre del servicio de MongoDB, MONGO_PORT: Puerto de Mongo (Puerto 27017 por defecto) y MONGO_DBNAME: Nombre de la base de datos del customer1.
  - --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para el caso de Eve se monta el directorio que contiene los archivos _run.py_ y _setting.py_ necesarios para inicializar el servicio.
  - --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
