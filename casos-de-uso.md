@@ -577,15 +577,42 @@ local               mongodata
  - --env: El servicio de Eve requiere de tres variables de ambiente; MONGO_HOST: Nombre del servicio de MongoDB, MONGO_PORT: Puerto de Mongo (Puerto 27017 por defecto) y MONGO_DBNAME: Nombre de la base de datos del customer1.
  - --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para el caso de Eve se monta el directorio que contiene los archivos _run.py_ y _setting.py_ necesarios para inicializar el servicio.
  - --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
- 
- * Verificar que el servidor Eve se encuentre en ejecución.
+
+
+* Verificar que el servidor Eve se encuentre en ejecución.
  
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u null:null http://192.168.99.100:6001]
-[warning {"_links": {"child": [{"href": "user", "title": "user"}]}}]
+**[warning {"_links": {"child": [{"href": "user", "title": "user"}]}}]
 ```
 
+ Dentro de la carpeta **customer1** se encuentran dos archivos a modo de ejemplo. El primero de ellos es _insert.json_ que contiene la información a enviar a la base de datos usando el servicio proporcionado por Eve. Para realizar el envío de los datos se debe ejecutar:
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u admin1:admin1  -v -s -d @insert.json -H "Content-Type: application/json" -X POST http://192.168.99.100:6001/user]
+   Trying 192.168.99.100...
+ Connected to 192.168.99.100 (192.168.99.100) port 6001 (#0)
+ Server auth using Basic with user 'admin1'
+ POST /user HTTP/1.1
+ Host: 192.168.99.100:6001
+ Authorization: Basic YWRtaW4xOmFkbWluMQ==
+ User-Agent: curl/7.49.1
+ Accept: */*
+ Content-Type: application/json
+ Content-Length: 60
+ 
+ upload completely sent off: 60 out of 60 bytes
+ HTTP/1.1 201 CREATED
+ Date: Sat, 28 Oct 2017 01:27:28 GMT
+ Server: Eve/0.7.4 Werkzeug/0.11.15 Python/3.5.2
+ Content-Type: application/json
+ Content-Length: 275
+ Location: http://192.168.99.100:6001/user/59f3dd0019e7de0005a1e238
+**[warning * Connection #0 to host 192.168.99.100 left intact
+{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "_status": "OK", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}}]
+```
 
 
 
