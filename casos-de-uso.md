@@ -591,7 +591,7 @@ local               mongodata
 
  Por el momento no existen usuarios y no puede proporcionarse las credenciales necesarias para consultar la información.
 
- Dentro de la carpeta **customer1** se encuentran dos archivos a modo de ejemplo. El primero de ellos es _insert.json_ contiene la información mostrada a continuación:
+ Dentro de la carpeta **customer1** se encuentran dos archivos a modo de ejemplo. El primero de ellos es _insert.json_ que contiene la información mostrada a continuación:
  
  ```json
  [{"username":"rgomez", "password":"456", "phone":"9998765"}]
