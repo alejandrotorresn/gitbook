@@ -583,11 +583,27 @@ local               mongodata
  
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u null:null http://192.168.99.100:6001]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl http://192.168.99.100:6001]
 **[warning {"_links": {"child": [{"href": "user", "title": "user"}]}}]
 ```
 
- Dentro de la carpeta **customer1** se encuentran dos archivos a modo de ejemplo. El primero de ellos es _insert.json_ que contiene la información a enviar a la base de datos usando el servicio proporcionado por Eve. Para realizar el envío de los datos se debe ejecutar:
+ La respuesta a la petición muestra que existe un _child_ **user** al cual podemos ingresar o consultar información, pero por el momento la Base de datos _customer1_db_ no contiene ninguna. La razón de ello es porque aún no se ha hecho la primera carga de datos. Si se consulta este podra verse la siguiente respuesta:
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl http://192.168.99.100:6001/user]
+**[warning {"_error": {"code": 401, "message": "Please provide proper credentials"}, "_status": "ERR"}]
+```
+
+ Por el momento no existen usuarios y no puede proporcionarse las credenciales necesarias para consultar la información.
+
+ Dentro de la carpeta **customer1** se encuentran dos archivos a modo de ejemplo. El primero de ellos es _insert.json_ contiene la información mostrada a continuación:
+ 
+ ```json
+ [{"username":"rgomez", "password":"456", "phone":"9998765"}]
+ ```
+
+ Para realizar el envío de estos datos se debe ejecutar:
  
  ```
 **[terminal]
@@ -614,6 +630,17 @@ local               mongodata
 {"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "_status": "OK", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}}]
 ```
 
+ **NOTA:** Para este ejemplo se usa un usuario administrador que permite el envío de información a la base de datos (**user:**admin1, **password:**admin1). Este usuario se encuentra especifícado dentro del archivo _run.py_.
+
+ Eve verifica la existencia de la base de datos en el servidor mongo (**mongo_eve**) para realizar el envío de la información, si esta no existe, Eve la crea de manera automática y prosigue con la transferencia de datos.
+ 
+ La información que se ha enviado a la base de datos crea un usuario que permite realizar consultas de la información disponible a través del servidor Eve. 
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u rgomez:456 http://192.168.99.100:6001/user]
+{"_meta": {"max_results": 25, "page": 1, "total": 1}, "_links": {"self": {"href": "user", "title": "user"}, "parent": {"href": "/", "title": "home"}}, "_items": [{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "password": "456", "phone": "9998765", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}, "username": "rgomez"}]}
+```
 
 
  
