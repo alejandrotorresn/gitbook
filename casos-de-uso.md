@@ -766,7 +766,9 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
 
 ![](/assets/Analitica_test.png)
 
-* Para verificar que las variables de entorno han sido creadas correctamente y se puede establecer conexión con la base de datos, se crea un nuevo Notebook con el siguiente contenido:![](/assets/analitica.png)
+* Para verificar que las variables de entorno han sido creadas correctamente y se puede establecer conexión con la base de datos, se crea un nuevo Notebook con el siguiente contenido:
+
+![](/assets/analitica.png)
 
  En la gráfica se observa que se ha impreso el contenido de las variables de entorno, realizado la conexión con la base de datos y consultado la colección _user_. Esta colección es la que contiene los datos que se han insertado mediante el servidor _Eve_ y que han sido enviados usando un archivo _json_ y un archivo _json_ comprimido _gzip._ 
 
