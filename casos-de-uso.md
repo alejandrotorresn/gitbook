@@ -639,13 +639,61 @@ local               mongodata
 **NOTA ACLARATORIA:** Debe recordarse que los archivos almacenados en la máquina virtual son temporales y al reiniciar o apagar el nodo estos se perderań. Los servicios que dependan de algún archivo no podrán iniciarse al no encontrarlo en la ruta especificada. Si por algún motivo se debio reiniciar el nodo, debe descargar nuevamente los archivos necesarios para el inicio del servicio, para el ejemplo anterior, los archivos run.py y settings.py.
 
 
+---
+**Despliegue del servicio de Analítica de Datos**
+
+---
  
+Básicamente el **Servicio de Analítica de Datos** consiten en _Jupyter Lab_ y Jupyter Notebooks_ (Miniconda) con los siguiente paquetes instalados:
+
+- bokeh
+- numpy
+- matplotlib
+- pandas
+- scikit-learn
+- scikit-image
+- jupyter
+- jupyterlab
+- ipywidgets
+- numba
+- pyproj
+- scipy
+- seaborn
+- sqlite
+- pymongo
+- tensorflow
+- zlib
+- pymc3
+- motionless
+- utm
+
+El servicio de **Analítica de Datos** requiere que al inicializarse se pase como variable de entorno los datos para la conexión a **MongoDB** y el nombre de la base de datos sobre la cual se realizará la analítica.
+
+Se recomienda crear un nuevo volumen para almacenar los notebooks que se generen en el servicio de analítica.
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer1]
+```
+
+Para inicializar el servicio de analítica:
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust1 --constraint 'node.hostname == manager' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=analitica_customer1,target=/home/analytics/ localhost:5000/analitica_datos]
+```
 
 
+--mount type=bind,source=/home/docker/Analytic_eve/Customers/customer1,destination=/home/eve 
 
-
-
-
+** Descripción de los parámetros del servicio de Eve**
+- --name: Nombre del servicio
+- --replicas: Número de espejos o replicas del servicio
+- --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
+- --publish: Puerto a mapear. (Número de puerto del Swarm: Número de puerto del servicio)
+- --env: El servicio de Eve requiere de tres variables de ambiente; MONGO_HOST: Nombre del servicio de MongoDB, MONGO_PORT: Puerto de Mongo (Puerto 27017 por defecto) y MONGO_DBNAME: Nombre de la base de datos del customer1.
+- --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para el caso de Eve se monta el directorio que contiene los archivos _run.py_ y _setting.py_ necesarios para inicializar el servicio.
+- --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
 
 ---
 
@@ -654,7 +702,7 @@ local               mongodata
 * Verificar que puede ejecutarse el servicio de **Análitica de Datos**.
 
 ```
-$ docker service create --name test_analitica --constraint 'node.hostname == manager' --publish 8888:8888 analitica_datos
+$ 
 ```
 
 * Verificar que el servicio se encuentra ejecutandose.
