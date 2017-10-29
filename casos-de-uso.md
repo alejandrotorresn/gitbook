@@ -636,6 +636,8 @@ local               mongodata
 {"_meta": {"max_results": 25, "page": 1, "total": 1}, "_links": {"self": {"href": "user", "title": "user"}, "parent": {"href": "/", "title": "home"}}, "_items": [{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "password": "456", "phone": "9998765", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}, "username": "rgomez"}]}
 ```
 
+**NOTA ACLARATORIA:** Debe recordarse que los archivos almacenados en la máquina virtual son temporales y al reiniciar o apagar el nodo estos se perderań. Los servicios que dependan de algún archivo no podrán iniciarse al no encontrarlo en la ruta especificada. Si por algún motivo se debio reiniciar el nodo, debe descargar nuevamente los archivos necesarios para el inicio del servicio, para el ejemplo anterior, los archivos run.py y settings.py.
+
 
  
 
