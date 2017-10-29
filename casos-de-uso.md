@@ -624,6 +624,8 @@ local               mongodata
 **[warning {"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "_status": "OK", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}}]
 ```
 
+ Puede observarse que el estatus del envio es **OK**.
+
  **NOTA:** Para este ejemplo se usa un usuario administrador que permite el envío de información a la base de datos (**user:**admin1, **password:**admin1). Este usuario se encuentra especifícado dentro del archivo _run.py_.
 
  Eve verifica la existencia de la base de datos en el servidor mongo (**mongo_eve**) para realizar el envío de la información, si esta no existe, Eve la crea de manera automática y prosigue con la transferencia de datos.
@@ -636,8 +638,38 @@ local               mongodata
 {"_meta": {"max_results": 25, "page": 1, "total": 1}, "_links": {"self": {"href": "user", "title": "user"}, "parent": {"href": "/", "title": "home"}}, "_items": [{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "password": "456", "phone": "9998765", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}, "username": "rgomez"}]}
 ```
 
-**NOTA ACLARATORIA:** Debe recordarse que los archivos almacenados en la máquina virtual son temporales y al reiniciar o apagar el nodo estos se perderań. Los servicios que dependan de algún archivo no podrán iniciarse al no encontrarlo en la ruta especificada. Si por algún motivo se debio reiniciar el nodo, debe descargar nuevamente los archivos necesarios para el inicio del servicio, para el ejemplo anterior, los archivos run.py y settings.py.
+ El servidor Eve esta configurado para aceptar envios de información en archivos json comprimidos como gzip. Dentro de los archivos de ejemplo se ecnuentra el archivo insert.json.gzip para el cual se ejecutará el siguiente comando:
 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u admin1:admin1 -v -s --trace-ascii http_trace.log --data-binary @insert.json.gz -H "Content-Type: application/json" -H "Content-Encoding: gzip" -X POST http://192.168.99.100/user]
+   Trying 192.168.99.100...
+ Connected to 192.168.99.100 (192.168.99.100) port 6001 (#0)
+ Server auth using Basic with user 'admin1'
+ POST /user HTTP/1.1
+ Host: 192.168.99.100:6001
+ Authorization: Basic YWRtaW4xOmFkbWluMQ==
+ User-Agent: curl/7.49.1
+ Accept: */*
+ Content-Type: application/json
+ Content-Encoding: gzip
+ Content-Length: 87
+ 
+ upload completely sent off: 87 out of 87 bytes
+ HTTP/1.1 201 CREATED
+ Date: Sun, 29 Oct 2017 22:43:01 GMT
+ Server: Eve/0.7.4 Werkzeug/0.11.15 Python/3.5.2
+ Content-Type: application/json
+ Content-Length: 275
+ Location: http://192.168.99.100:6001/user/59f65975b18b1b0005660c9f
+ 
+ Connection #0 to host 192.168.99.100 left intact
+**[warning {"_etag": "0b995ae393b45be1b6cf8025f2aeb26e30a0e9ee", "_id": "59f65975b18b1b0005660c9f", "_updated": "Sun, 29 Oct 2017 22:43:01 GMT", "_status": "OK", "_created": "Sun, 29 Oct 2017 22:43:01 GMT", "_links": {"self": {"title": "User", "href": "user/59f65975b18b1b0005660c9f"}}}]
+```
+
+ Puede observarse que el estatus del envio es **OK**.
+ 
+ **NOTA ACLARATORIA:** Debe recordarse que los archivos almacenados en la máquina virtual son temporales y al reiniciar o apagar el nodo estos se perderań. Los servicios que dependan de algún archivo no podrán iniciarse al no encontrarlo en la ruta especificada. Si por algún motivo se debio reiniciar el nodo, debe descargar nuevamente los archivos necesarios para el inicio del servicio, para el ejemplo anterior, los archivos run.py y settings.py.
 
 ---
 **Despliegue del servicio de Analítica de Datos**
@@ -669,93 +701,45 @@ Básicamente el **Servicio de Analítica de Datos** consiten en _Jupyter Lab_ y 
 
 El servicio de **Analítica de Datos** requiere que al inicializarse se pase como variable de entorno los datos para la conexión a **MongoDB** y el nombre de la base de datos sobre la cual se realizará la analítica.
 
-Se recomienda crear un nuevo volumen para almacenar los notebooks que se generen en el servicio de analítica.
+* Se recomienda crear un nuevo volumen para almacenar los notebooks que se generen en el servicio de analítica.
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer1]
 ```
 
-Para inicializar el servicio de analítica:
+* Para inicializar el servicio de analítica:
 
-```
+ ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust1 --constraint 'node.hostname == manager' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=analitica_customer1,target=/home/analytics/ localhost:5000/analitica_datos]
 ```
 
-
---mount type=bind,source=/home/docker/Analytic_eve/Customers/customer1,destination=/home/eve 
-
-** Descripción de los parámetros del servicio de Eve**
-- --name: Nombre del servicio
-- --replicas: Número de espejos o replicas del servicio
-- --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
-- --publish: Puerto a mapear. (Número de puerto del Swarm: Número de puerto del servicio)
-- --env: El servicio de Eve requiere de tres variables de ambiente; MONGO_HOST: Nombre del servicio de MongoDB, MONGO_PORT: Puerto de Mongo (Puerto 27017 por defecto) y MONGO_DBNAME: Nombre de la base de datos del customer1.
-- --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para el caso de Eve se monta el directorio que contiene los archivos _run.py_ y _setting.py_ necesarios para inicializar el servicio.
-- --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
-
----
+ ** Descripción de los parámetros del servicio de Eve**
+ - --name: Nombre del servicio
+ - --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
+ - --publish: Puerto a mapear. (Número de puerto del Swarm: Número de puerto del  servicio)
+ - --env: El servicio de Eve requiere de tres variables de ambiente; MONGO_HOST: Nombre del servicio de MongoDB, MONGO_PORT: Puerto de Mongo (Puerto 27017 por defecto) y MONGO_DBNAME: Nombre de la base de datos del customer1.
+ - --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
+ - --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para este caso es el volumen en donde se almacenaran los notebooks u otros archivos generados desde el servicio de analísis de datos.
 
 
+* Se debe verificar que el servicio de **Análitica de Datos** esta ejecutado correctamente.
 
-* Verificar que puede ejecutarse el servicio de **Análitica de Datos**.
-
-```
-$ 
-```
-
-* Verificar que el servicio se encuentra ejecutandose.
-
-```
-$ docker service ls
-
-ID                  NAME                MODE                REPLICAS            IMAGE                    PORTS
-ye8ngif9e4qe        test_analitica      replicated          1/1                 analitica_datos:latest   *:8888->8888/tcp
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]
+ID                  NAME                MODE                REPLICAS            IMAGE                                   PORTS
+**[warning ywufp9gbxo0d        analitica_cust1     replicated          1/1                 localhost:5000/analitica_datos:latest   *:8888->8888/tcp]
+tab0txq47kr5        eve_customer1       replicated          1/1                 localhost:5000/eve_apache:latest        *:6001->80/tcp
+l2k5841dzoq6        mongo_eve           replicated          1/1                 localhost:5000/mongo:latest             *:27017->27017/tcp
+hw74xi7gsmbq        registry            replicated          1/1                 registry:2                              *:5000->5000/tcp
 ```
 
 * Ingresar a la dirección [http://192.168.99.100:8888](http://192.168.99.100:8888) para verficar que el servicio es valido.
 
 ![](/assets/Analitica_test.png)
 
-* Eliminar el servicio de prueba para el contenedor de análitica.
-
-```
-$ docker service rm test_analitica
-```
-
-
-
-
-
-* Para evaluar el servicio de Eve se debe tener el servicio de **MongoDB** en funcionamiento, para ello se ejecuta:
-
-```
-$ docker service --name=mongo_eve --constraint 'node.hostname == manager' --publish 27017:27017 mongo
-```
-
-* Verificar que puede ejecutarse el servicio de Eve.
-
-```
-$ docker service create --name test_eve --constraint 'node.hostname == manager' --publish 80:80 eve_apache
-```
-
-* Verificar que el servicio se encuentra ejecutandose.
-
-```
-$ docker service ls
-
-
-ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-546j5e76f8i2        mongo_eve           replicated          1/1                 mongo:latest        *:27017->27017/tcp
-elh3v5ugfl5i        test_eve            replicated          1/1                 test_eve:latest     *:80->80/tcp
-```
-
-* Ingresar a la dirección [http://192.168.99.100](http://192.168.99.100:8888) para verficar que el servicio es valido.
-
-![](/assets/Eve_test.png)La configuración básica del Servidor REST Eve pide un usuario y una contraseña. Por el momento no se han ingresado usuarios, por lo tanto el servidor Eve mostrara información como la mostrada en la imagen anterior.
-
-* Enviar información a Eve para verificar si esta recibiendo tanto archivos .json como .gzip
 
 
 
