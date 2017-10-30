@@ -538,7 +538,7 @@ Para este caso de uso se despliegan los servicios de MongoDB, Eve y Analítica d
 
 Para desplegar el primer caso de uso, se debe:
 
-Ingresar al nodo **manager1** del Swarm sino lo esta.
+Ingresar al nodo **manager1** del Swarm si no lo está.
 
 ```
 **[terminal]
