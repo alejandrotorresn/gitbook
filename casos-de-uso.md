@@ -242,7 +242,7 @@ Repetir estos pasos para el nodo **worker2**.
 
 ![](/assets/grafana.png)
 
-* En Grafana crear un nuevo _data source_ con el nombre **influx**, de tipo **InfluxDB**, con url [http://influx:8086](http://influx:8086) y database **cadvidor**.
+* En Grafana crear un nuevo _data source_ con el nombre **influx**, de tipo **InfluxDB**, con url [http://influx:8086](http://influx:8086) y database **cadvisor**.
 
 ![](/assets/influxdb_grafana.png)
 
