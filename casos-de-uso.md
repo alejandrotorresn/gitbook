@@ -770,11 +770,11 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
 
 ![](/assets/analitica.png)
 
- En la gráfica se observa que se ha impreso el contenido de las variables de entorno, realizado la conexión con la base de datos y consultado la colección _user_. Esta colección es la que contiene los datos que se han insertado mediante el servidor _Eve_ y que han sido enviados usando un archivo _json_ y un archivo _json_ comprimido _gzip._ 
+En la gráfica se observa que se ha impreso el contenido de las variables de entorno, realizado la conexión con la base de datos y consultado la colección _user_. Esta colección es la que contiene los datos que se han insertado mediante el servidor _Eve_ y que han sido enviados usando un archivo _json_ y un archivo _json_ comprimido _gzip._
 
 ### CASOS DE USO - AVANZADO
 
-servicios a correr
+#### CASO 1
 
 1 servicio mongo
 
@@ -784,15 +784,25 @@ servicios a correr
 
 1 servicio de analitica de datos
 
+#### CASO 1
+
+#### CASO 1
+
+#### CASO 1
+
+#### CASO 1
+
+#### CASO 1
+
+#### CASO 1
+
+servicios a correr
+
 use case2:
 
-1. full installation
+1. mongo + eves running permanently, ocasional analytics container
 
-2. mongo + eves running permanently, ocasional analytics container
-
-3. mongo + eve customer1 permanently. eve customer2 + analytics ocasional
-
-4. ganglia/swarm management/query web interface
+2. mongo + eve customer1 permanently. eve customer2 + analytics ocasional
 
 
 
