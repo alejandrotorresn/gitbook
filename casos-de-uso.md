@@ -506,7 +506,7 @@ Para la creación del repositorio local se usará [_Docker Registry_](https://do
 
 ---
 
-La red Overlay permite a los servicios comunicarse entre ellos. Con esto los servicios no necesitan conocer la IP ni el nombre del nodo en donde se encuentra alojado el contenedor que los esta ejecutando. En otras palabras, los servicios puede comunicarse gracias a un servicio de DNS de Docker en modo Swarm mediante una red Overlay.
+La red Overlay permite a los servicios comunicarse entre ellos. Con esto los servicios no necesitan conocer la IP ni el nombre del nodo en donde se encuentra alojado el contenedor que los está ejecutando. En otras palabras, los servicios pueden comunicarse gracias a un servicio de DNS de Docker en modo Swarm mediante una red Overlay.
 
 ```
 **[terminal]
@@ -533,7 +533,7 @@ Los casos de uso se dividen en dos en donde la primera parte abordará el despli
 
 ### CASO DE USO BÁSICO - DESPLIEGUE DE SERVICIOS DE ANÁLITICA
 
-Para este caso de uso se despliegan los servicios de MongoDB, Eve y Analítica de Datos para un solo _Customer_ y en un único nodo \(**manager1**\). Cabe recordar que la infraestructura creada para estos casos de uso cuenta con un nodo **manager** y dos nodos **workers**, por lo tanto, en el comando de la creación de los servicios se especificará el nodo donde se desplegarán los servicios. Si la infraestructura solo contara con un solo nodo \(nodo **manager**\) no sería necesario esta especificación \(los nodos **manager** tambien funcionan con nodos **workers**, al menos que se especifique lo contrario\).
+Para este caso de uso se despliegan los servicios de MongoDB, Eve y Analítica de Datos para un solo _Customer_ y en un único nodo \(**manager1**\). Cabe recordar que la infraestructura creada para estos casos de uso cuenta con un nodo **manager** y dos nodos **workers**, por lo tanto, en el comando de la creación de los servicios se especificará el nodo donde se desplegarán los servicios. Si la infraestructura solo contara con un nodo \(nodo **manager**\) no sería necesario esta especificación \(los nodos **manager** tambien funcionan con nodos **workers**, a menos que se especifique lo contrario\).
 
 Para desplegar el primer caso de uso, se debe:
 
@@ -594,7 +594,7 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
 
 ---
 
-* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager1**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que solo crea contendores con sistemas de archivos de solo lectura y al apagar o reiniciar los nodos la información allí almacenada se perderá.
+* Descargar los archivos de ejemplo desde el repositorio de GitHub si no los tiene en el nodo **manager1**. Se debe recordar que los nodos estan construidos en base a la imagen **boot2docker** que crea contendores con sistemas de archivos de solo lectura y al apagar o reiniciar los nodos la información allí almacenada se perderá.
 
   ```
   **[terminal]
@@ -640,7 +640,7 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
 
   ```
   **[terminal]
-  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl http://192.168.99.100:6001]
+  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u null:null http://192.168.99.100:6001]
   **[warning {"_links": {"child": [{"href": "user", "title": "user"}]}}]
   ```
 
@@ -701,11 +701,11 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
   {"_meta": {"max_results": 25, "page": 1, "total": 1}, "_links": {"self": {"href": "user", "title": "user"}, "parent": {"href": "/", "title": "home"}}, "_items": [{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "password": "456", "phone": "9998765", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}, "username": "rgomez"}]}
   ```
 
-  El servidor Eve esta configurado para aceptar envios de información en archivos json comprimidos como gzip. Dentro de los archivos de ejemplo se ecnuentra el archivo insert.json.gzip para el cual se ejecutará el siguiente comando:
+  El servidor Eve esta configurado para aceptar envios de información en archivos json comprimidos como gzip. Dentro de los archivos de ejemplo se encuentra el archivo **insert.json.gzip** para el cual se ejecutará el siguiente comando:
 
   ```
   **[terminal]
-  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u admin1:admin1 -v -s --trace-ascii http_trace.log --data-binary @insert.json.gz -H "Content-Type: application/json" -H "Content-Encoding: gzip" -X POST http://192.168.99.100/user]
+  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u admin1:admin1 -v -s --trace-ascii http_trace.log --data-binary @insert.json.gz -H "Content-Type: application/json" -H "Content-Encoding: gzip" -X POST http://192.168.99.100:6001/user]
    Trying 192.168.99.100...
   Connected to 192.168.99.100 (192.168.99.100) port 6001 (#0)
   Server auth using Basic with user 'admin1'
@@ -792,10 +792,10 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
 
   ```
   **[terminal]
-  **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust1 --constraint 'node.hostname == manager' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=analitica_customer1,target=/home/analytics/ localhost:5000/analitica_datos]
+  **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust1 --constraint 'node.hostname == manager1' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=analitica_customer1,target=/home/analytics/ localhost:5000/analitica_datos]
   ```
 
-  ** Descripción de los parámetros del servicio de Eve**
+  ** Descripción de los parámetros del servicio de Analítica**
 
   * --name: Nombre del servicio
   * --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
