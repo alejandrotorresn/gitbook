@@ -694,7 +694,7 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
 
   Eve verifica la existencia de la base de datos en el servidor mongo \(**mongo\_eve**\) para realizar el envío de la información, si esta no existe, Eve la crea de manera automática y prosigue con la transferencia de datos.
 
-  La información que se ha enviado a la base de datos crea un usuario que permite realizar consultas de la información disponible a través del servidor Eve.
+  La información que se ha enviado a la base de datos crea un usuario (**rgomez**) que permite realizar consultas de la información disponible a través del servidor Eve.
 
   ```
   **[terminal]
@@ -702,11 +702,11 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
   {"_meta": {"max_results": 25, "page": 1, "total": 1}, "_links": {"self": {"href": "user", "title": "user"}, "parent": {"href": "/", "title": "home"}}, "_items": [{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "password": "456", "phone": "9998765", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}, "username": "rgomez"}]}
   ```
 
-  El servidor Eve esta configurado para aceptar envios de información en archivos json comprimidos como gzip. Dentro de los archivos de ejemplo se encuentra el archivo **insert.json.gzip** para el cual se ejecutará el siguiente comando:
+  El servidor Eve esta configurado para aceptar envios de información en archivos json comprimidos como gzip. Dentro de los archivos de ejemplo se encuentra **insert.json.gzip** que contiene información de un nuevo usuario (**ltorres**), para agregar la información a la base de datos se ejecuta el siguiente comando:
 
-  ```
+ ```
   **[terminal]
-  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u admin1:admin1 -v -s --trace-ascii http_trace.log --data-binary @insert.json.gz -H "Content-Type: application/json" -H "Content-Encoding: gzip" -X POST http://192.168.99.100:6001/user]
+  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u admin1:admin1 -v -s --data-binary @insert.json.gz -H "Content-Type: application/json" -H "Content-Encoding: gzip" -X POST http://192.168.99.100:6001/user]
    Trying 192.168.99.100...
   Connected to 192.168.99.100 (192.168.99.100) port 6001 (#0)
   Server auth using Basic with user 'admin1'
@@ -732,14 +732,8 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
   ```
 
   Puede observarse que el estatus del envio es **OK**.
-
-  ```
-  **[terminal]
-  **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command curl -u rgomez:456 http://192.168.99.100:6001/user]
-  {"_meta": {"max_results": 25, "page": 1, "total": 1}, "_links": {"self": {"href": "user", "title": "user"}, "parent": {"href": "/", "title": "home"}}, "_items": [{"_created": "Sat, 28 Oct 2017 01:27:28 GMT", "_updated": "Sat, 28 Oct 2017 01:27:28 GMT", "password": "456", "phone": "9998765", "_id": "59f3dd0019e7de0005a1e238", "_etag": "3a3e866d706a9f793fc1f16224f1fe5252f7b9b7", "_links": {"self": {"href": "user/59f3dd0019e7de0005a1e238", "title": "User"}}, "username": "rgomez"}]}
-  ```
-
-  El servidor Eve esta configurado para aceptar envios de información en archivos json comprimidos como gzip. Dentro de los archivos de ejemplo se ecnuentra el archivo insert.json.gzip que contiene un nuevo usuario llamado _ltorres_. Para insertar la información del nuevo usuario en la base de datos se ejecuta el siguiente comando:
+  
+  Al consultar nuevamente la base de datos a través del servicio de Eve se observará que el nuevo usuario ha sido agregado (**ltorres**).
 
   ```
   **[terminal]
