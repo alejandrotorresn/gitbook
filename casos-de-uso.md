@@ -347,10 +347,11 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
 ```
 
 ---
-
 **Creación de la Imagen del Servicio REST - Eve**
 
 ---
+
+De aquí en adelante se asume que se encuentra dentro del repositorio descargado de GitHub \(directorio **Analytic\_eve**\).
 
 * Ingrese al directorio Eve
 
