@@ -210,7 +210,59 @@ Repetir estos pasos para el nodo **worker2**.
   2mlcvbq1jlvkzygogoxym86o2 *   manager1            Ready               Active              Leader
   9vzt9zkvye2na0udnvvt8k29d     worker1             Ready               Active              
   r9g23qn715xuemvvielc4nr8k     worker2             Ready               Active
-  ```
+```
+
+## MONITOREO DE DOCKER SWARM
+
+* Descargar el archivo _docker-stack.yml_
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command wget https://raw.githubusercontent.com/botleg/swarm-monitoring/master/docker-stack.yml]
+```
+
+* Desplegar los servicios de monitoreo:
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker stack deploy -c docker-stack.yml monitor]
+```
+
+ **NOTA:** Debe esperar un tiempo hasta que los servicios se inicien antes de poder crear la base de datos del siguiente paso.
+ 
+ * Crear la base de datos llamada **cadvisor** en InfluxDB:
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker exec `docker ps | grep -i influx | awk '{print $1}'` influx -execute 'CREATE DATABASE cadvisor']
+```
+
+ Si recibe algún mensaje informando que no se encuentra el contenedor _influx_ es debido a que aun no ha sido creado por el servicio.
+ 
+* Abrir grafana en el navegador. El servicio se ha habilitado en el puerto 80 y el usuario es **admin** al igual que la contraseña.
+ 
+
+
+* En Grafana crear un nuevo _data source_ con el nombre **influx**, de tipo **InfluxDB**, con url **http://influx:8086** y database **cadvidor**.
+
+
+
+* Descargar el archivo dashboard.json en el servidor base.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command exit]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command wget https://raw.githubusercontent.com/botleg/swarm-monitoring/master/dashboard.json]
+```
+* En el la ventada del navegador donde se encuentra abierto el servicio de Grafana, hacer clic en el icono de la parte superiro izquierda, seleccionar _Dashboards_ y luego _import_. Cargar el archivo _dashboard.json_.
+
+
+
+* Darle un nombre al Dashboard y seleccionar la fuente de datos Influx.
+  
+
+
+
 
 ## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
 
@@ -794,7 +846,6 @@ En la gráfica se observa que se ha impreso el contenido de las variables de ent
 * Un servicio de Eve para el _customer2_ corriendo de forma ocasional.
 * Servicio de Analítica de Datos corriendo de forma ocasional.
 
-#### 
 
 
 
