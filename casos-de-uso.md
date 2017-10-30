@@ -581,6 +581,7 @@ Ingresar al nodo **manager1** del Swarm si no lo está.
   * --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio
   * --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio  
 
+
 * Verificar que el servicio de MongoDB \(mongo\_eve\) se encuentre en ejecución.
 
   ```
@@ -636,6 +637,7 @@ Ingresar al nodo **manager1** del Swarm si no lo está.
   * --env: El servicio de Eve requiere de tres variables de ambiente; MONGO\_HOST: Nombre del servicio de MongoDB, MONGO\_PORT: Puerto de Mongo \(Puerto 27017 por defecto\) y MONGO\_DBNAME: Nombre de la base de datos del customer1.
   * --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para el caso de Eve se monta el directorio que contiene los archivos _run.py_ y _setting.py_ necesarios para inicializar el servicio.
   * --constraint: Especifica el nombre de la máquina en la cual se desplegará el servicio
+
 
 * Verificar que el servidor Eve se encuentre en ejecución.
 
@@ -798,6 +800,7 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
   * --env: El servicio de Eve requiere de tres variables de ambiente; MONGO\_HOST: Nombre del servicio de MongoDB, MONGO\_PORT: Puerto de Mongo \(Puerto 27017 por defecto\) y MONGO\_DBNAME: Nombre de la base de datos del customer1.
   * --network: Nombre de la red a la que se enlazará el servicio. Para este caso se usa una red overlay con el fin de comunicar servicios
   * --mount: Folders o Volumenes a montar dentro del contenedor que ofrece el servicio. Para este caso es el volumen en donde se almacenaran los notebooks u otros archivos generados desde el servicio de analísis de datos.
+
 
 * Se debe verificar que el servicio de **Análitica de Datos** esta ejecutado correctamente.
 
