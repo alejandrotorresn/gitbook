@@ -776,33 +776,25 @@ En la gráfica se observa que se ha impreso el contenido de las variables de ent
 
 #### CASO 1
 
-1 servicio mongo
+* Un servicio de Mongo.
+* Un servicio de Eve para el _customer1_ con una sola replica en el puerto 6001.
+* Un servicio de Eve para el _customer2_ dos replicas en el puerto 6002.
+* Un servicio de Analítica de Datos.
 
-1 servicio Eve para el usuario1 - Una sola replica - puerto XX
+#### CASO 2
 
-1 servicio Eve para el usuario2 - Dos replicas - puerto YY
+* Un servicio de Mongo corriendo permanentemente.
+* Un servicio de Eve corriendo de forma permanente
+* Un servicio de analítica corriendo de forma ocasional.
 
-1 servicio de analitica de datos
+#### CASO 3
 
-#### CASO 1
+* Un servicio de Mongo corriendo permanentemente.
+* Un servicio de Eve para el _customer1_ corriendo permanentemente.
+* Un servicio de Eve para el _customer2_ corriendo de forma ocasional.
+* Servicio de Analítica de Datos corriendo de forma ocasional.
 
-#### CASO 1
-
-#### CASO 1
-
-#### CASO 1
-
-#### CASO 1
-
-#### CASO 1
-
-servicios a correr
-
-use case2:
-
-1. mongo + eves running permanently, ocasional analytics container
-
-2. mongo + eve customer1 permanently. eve customer2 + analytics ocasional
+#### 
 
 
 
