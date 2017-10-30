@@ -14,7 +14,7 @@ Se implementaran los servicios de **MongoDB**, Servidores REST basados en **Eve*
 
 ## CREACIÓN DE LAS MÁQUINAS VIRTUALES
 
-Docker-machine usa la imagen **boot2docker** para crear las máquinas virtuales la cual crea contenedores con sistemas de archivos de solo lectura y por tanto, cada vez que se reinicie un nodo, todos los datos almacenados en este se perderán. Para asegurar la persistencia de los datos se hace necesario la creación de [volumenes](https://docs.docker.com/engine/admin/volumes/volumes/).
+Docker-machine usa la imagen **boot2docker** para crear las máquinas virtuales. Esta imagen instala un sistema operativo con un sistema de archivos de solo lectura y al reiniciar un nodo, todos los datos almacenados en este se perderán. Para asegurar la persistencia de los datos se hace necesario la creación de [volumenes](https://docs.docker.com/engine/admin/volumes/volumes/).
 
 * Creación del nodo Manager \(Es recomendable asignarle un mínimo de 4GB de memoria al nodo manager\):
 
@@ -230,14 +230,15 @@ Repetir estos pasos para el nodo **worker2**.
 
   **NOTA:** Debe esperar un tiempo hasta que los servicios se inicien antes de poder crear la base de datos del siguiente paso.
 
-  * Crear la base de datos llamada **cadvisor** en InfluxDB:
-
-      **[terminal]
-      **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker exec `docker ps | grep -i influx | awk '{print $1}'` influx -execute 'CREATE DATABASE cadvisor']
+* Crear la base de datos llamada **cadvisor** en InfluxDB:
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker exec `docker ps | grep -i influx | awk '{print $1}'` influx -execute 'CREATE DATABASE cadvisor']   
+```
 
   Si recibe algún mensaje informando que no se encuentra el contenedor _influx_ es debido a que aun no ha sido creado por el servicio.
 
-* Abrir grafana en el navegador. El servicio se ha habilitado en el puerto 80 y el usuario es **admin** al igual que la contraseña.
+* Abrir grafana en el navegador (http://192.168.99.100). El servicio se ha habilitado en el puerto 80 y el usuario es **admin** al igual que la contraseña. Cabe hacer notar que puede usarse cualquier IP vinculada a un nodo del Swarm.
 
 ![](/assets/grafana.png)
 
@@ -253,7 +254,7 @@ Repetir estos pasos para el nodo **worker2**.
   **[prompt user@server]**[path ~]**[delimiter $ ]**[command wget https://raw.githubusercontent.com/botleg/swarm-monitoring/master/dashboard.json]
   ```
 
-* En el la ventada del navegador donde se encuentra abierto el servicio de Grafana, hacer clic en el icono de la parte superiro izquierda, seleccionar _Dashboards_ y luego _import_. Cargar el archivo _dashboard.json_.
+* En el la ventada del navegador donde se encuentra abierto el servicio de Grafana, hacer clic en el icono de la parte superior izquierda, seleccionar _Dashboards_ y luego _import_. Cargar el archivo _dashboard.json_.
 
 ![](/assets/dashboard_grafana.png)
 
@@ -267,7 +268,7 @@ Repetir estos pasos para el nodo **worker2**.
 
 ## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
 
-Ingresar al nodo **manager1** del Swarm sino lo esta.
+Ingresar al nodo **manager1** del Swarm si no lo está.
 
 ```
 **[terminal]
@@ -281,7 +282,7 @@ Los archivos Dockerfile que contienen la creación de estas dos imagenes se encu
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command git clone https://github.com/alejandrotorresn/Analytic_eve.git]
 ```
 
-El contenido debe ser similar al mostrado a continuación:
+La estructura debe ser similar a la mostrada a continuación:
 
 ```bash
 ├── Analitica
@@ -313,14 +314,14 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
 
 * Ingresar al directorio Analitica
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~/Analytic_eve]**[delimiter $ ]**[command cd Analitica]
-  ```
+```
 
 * Construir la imagen.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~/Analytic_eve/Analitica]**[delimiter $ ]**[command docker build -t analitica_datos .]
   Sending build context to Docker daemon  3.584kB
@@ -333,17 +334,17 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
   Removing intermediate container 242aaae16bcf
   Successfully built db974366bc12
   Successfully tagged analitica_datos:latest
-  ```
+```
 
 * Verificar que la imagen ha sido creada correctamente.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~/Analytic_eve/Analitica]**[delimiter $ ]**[command docker images]
   REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
   analitica_datos     latest              db974366bc12        About a minute ago   3.19GB
   ubuntu              latest              747cb2d60bbe        2 weeks ago          122MB
-  ```
+```
 
 ---
 
@@ -353,14 +354,14 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
 
 * Ingrese al directorio Eve
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~/Analytic_eve]**[delimiter $ ]**[command cd Eve]
-  ```
+```
 
 * Construir la imagen
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker build -t eve_apache .]
   Sending build context to Docker daemon  5.632kB
@@ -376,14 +377,14 @@ De aquí en adelante se asume que se encuentra dentro del repositorio descargado
   Removing intermediate container 2bace4da73c3
   Successfully built a3156b948c5e
   Successfully tagged eve_apache:latest
-  ```
+```
 
 * Verificar que la imagen ha sido creada correctamente.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~/Analytic_eve/Eve]**[delimiter $ ]**[command docker images]
-  ```
+```
 
 ---
 
@@ -411,28 +412,28 @@ Para la creación del repositorio local se usará [_Docker Registry_](https://do
 
 * Crear el volumen para almacenar las imagenes. El servicio de _registry_ se ejecutara en el nodo **manager1** por tanto el volumen se creará en este nodo.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name registry]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume ls]
   DRIVER VOLUME NAME
   local registry
-  ```
+```
 
 * Ejecutar el servicio.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name registry --constraint 'node.hostname == manager1'  --publish 5000:5000 --mount type=volume,source=registry,target=/var/lib/registry registry:2]
   j0961u4mqk6krwur9f2x4qo2n
   overall progress: 1 out of 1 tasks 
   1/1: running   [==================================================>] 
   verify: Service converged
-  ```
+```
 
 * Listar las imagenes.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image ls]
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
@@ -441,22 +442,22 @@ Para la creación del repositorio local se usará [_Docker Registry_](https://do
   mongo               latest              a28fdc58a538        19 hours ago        361MB
   registry            <none>              2ba7189700c8        22 hours ago        33.3MB
   ubuntu              latest              747cb2d60bbe        2 weeks ago         122MB
-  ```
+```
 
 * Etiquetar las imagenes con una etiqueta adicional donde se especifique el hostname y el puerto. Docker automáticamente interpreta que esta es la ubicación del _registry_.
 
   Para el repositorio de Análitica solo se etiquetaran las imagenes de eve\_apache, analitica\_datos y mongo.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker tag eve_apache localhost:5000/eve_apache]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker tag analitica_datos localhost:5000/analitica_datos]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker tag mongo localhost:5000/mongo]
-  ```
+```
 
 * Listar las imagenes para ver que se han reetiquetado correctamente.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker images]
   REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
@@ -468,28 +469,28 @@ Para la creación del repositorio local se usará [_Docker Registry_](https://do
   localhost:5000/mongo             latest              a28fdc58a538        20 hours ago        361MB
   registry                         <none>              2ba7189700c8        22 hours ago        33.3MB
   ubuntu                           latest              747cb2d60bbe        2 weeks ago         122MB
-  ```
+```
 
 * Subir las imagenes al _registry_ local que se encuentra corriendo en localhost:5000.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker push localhost:5000/eve_apache]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker push localhost:5000/analitica_datos]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker push localhost:5000/mongo]
-  ```
+```
 
 * Asegurarse que las imagenes han sido cargadas al repositorio local.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command curl localhost:5000/v2/_catalog]
   **[warning {"repositories":["analitica_datos","eve_apache","mongo"]}]
-  ```
+```
 
 * Puede remover las imagenes locales sin afectar las imagenes que ya se han cagador al _registry_.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove eve_apache]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove localhost:5000/eve_apache]
@@ -497,7 +498,7 @@ Para la creación del repositorio local se usará [_Docker Registry_](https://do
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove localhost:5000/analitica_datos]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove mongo]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker image remove localhost:5000/mongo]
-  ```
+```
 
 ---
 
@@ -553,7 +554,7 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
 
   Para este caso de uso se implementa MongoDB en un solo nodo y sus volumenes se crearán en el nodo donde se despliega el servicio.
 
-  ```
+ ```
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongodata]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongoconfig]
@@ -561,7 +562,7 @@ Ingresar al nodo **manager1** del Swarm sino lo esta.
   DRIVER              VOLUME NAME
   local               mongoconfig
   local               mongodata
-  ```
+```
 
 * Ejecutar el servicio de MongoDB.
 
