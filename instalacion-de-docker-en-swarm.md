@@ -182,7 +182,7 @@ Para obtener el comando para incluir un worker al Swarm:
  * Listar los nodos del Swarm:
  ```
  **[terminal]
-**[prompt docker@manager]**[path ~]**[delimiter $ ]**[command docker node ls]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node ls]
 ```
 
 ## AWS
