@@ -79,6 +79,8 @@ To add a manager to this swarm, run the following command:
 
 ## Regenerar los tokens
 
+La regeneración de Tokens se realiza por motivos de seguridad. Es conveniente hacer esta tarea de forma periodica para evitar que se añadan nodos sin autorización. Esto debido a la posibilidad de la distribución del _token_ sin la autorización del administrador. 
+
 ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker swarm join-token --rotate worker]
@@ -88,3 +90,27 @@ To add a worker to this swarm, run the following command:
 
     **[warning docker swarm join --token SWMTKN-1-16b0v848cdwo4ehoxcxwmxq3fe2havmm7xacs2u4ilxjrkkfvn-c9cfisa9snnirw2dz0vwy7ul2 192.168.99.100:2377]
 ```
+
+
+## Abandonar un Swarm desde un Nodo
+
+Este comando debe ejecutarse desde el nodo worker.
+
+```
+**[terminal]
+**[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command docker swarm leave]
+```
+
+## Eliminar un nodo que ha dejado el Swarm
+
+Este comando debe ejecutarse desde el nodo manager.
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker node rm worker1]
+```
+
+
+
+
+
