@@ -43,6 +43,8 @@ A continuación se muestra la creación de un servicio **MongoDB** con un única
   overall progress: 0 out of 1 tasks
   overall progress: 1 out of 1 tasks                          1/1: running
   ```
+  
+  **Nota**: Como se menciono al principio de la sección, la imagen **mongo** se descargará del respositorio de DockerHub para luego construir el servicio en base a ella.
 
   Este servicio se levanta en un nodo del Swarm. Para verificar que el servicio fue creado e inicializado de forma correcta, se usa el siguiente comando:
 
