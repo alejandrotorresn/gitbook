@@ -837,7 +837,7 @@ client = MongoClient(MONGO_HOST, MONGO_PORT)
 db = client[MONGO_DBNAME]
 collection = db.user
 for post in collection.find():
-  print post
+      print post
 ```
 
 ![](/assets/analitica.png)
