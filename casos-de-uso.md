@@ -789,7 +789,7 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
 
   ```
   **[terminal]
-  **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust1 --constraint 'node.hostname == manager1' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=analitica_customer1,target=/home/analytics/ localhost:5000/analitica_datos]
+  **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust1 --constraint 'node.hostname == manager1' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=analitica_customer1,target=/home/analytics/Notebooks localhost:5000/analitica_datos]
   ```
 
   ** Descripción de los parámetros del servicio de Analítica**
@@ -837,7 +837,7 @@ client = MongoClient(MONGO_HOST, MONGO_PORT)
 db = client[MONGO_DBNAME]
 collection = db.user
 for post in collection.find():
-print post
+  print post
 ```
 
 ![](/assets/analitica.png)
