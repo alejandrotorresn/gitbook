@@ -72,7 +72,7 @@ A continuación se muestra la creación de un servicio **MongoDB** con un única
 
 ---
   
-**Para agragarle un nombre al servicio, se usa la bandera --flag**:
+**Para agragarle un nombre al servicio, se usa la bandera --name**:
 
 ```
 **[terminal]
