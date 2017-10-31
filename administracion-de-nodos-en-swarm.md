@@ -91,7 +91,6 @@ To add a worker to this swarm, run the following command:
     **[warning docker swarm join --token SWMTKN-1-16b0v848cdwo4ehoxcxwmxq3fe2havmm7xacs2u4ilxjrkkfvn-c9cfisa9snnirw2dz0vwy7ul2 192.168.99.100:2377]
 ```
 
-
 ## Abandonar un Swarm desde un Nodo
 
 Este comando debe ejecutarse desde el nodo worker.
