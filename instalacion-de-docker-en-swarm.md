@@ -174,9 +174,8 @@ Para obtener el comando para incluir un worker al Swarm:
 * Verificar que los nodos estes vinculados al Swarm
 
  * Ingresar al nodo **manager1**
-
   ```
-**[terminal]
+ **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
 ```
 
