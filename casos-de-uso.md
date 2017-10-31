@@ -454,6 +454,8 @@ Para la creación del repositorio local se usará [_Docker Registry_](https://do
   verify: Service converged
 ```
 
+ **Nota:** La imagen _registry:2_ es descargada directamente desde el repositorio de DockerHub. El número dos (2) quiere decir la versión de la imagen que se desea utilizar, si no se especifica, docker asume que se desea usar la última versión disponible.
+
 * Listar las imagenes.
 
  ```
@@ -806,6 +808,31 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
   **[terminal]
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer1]
   ```
+
+* Copiar el archivo **settings.py** del _customer1_ al voluemen que contendrá los archivos del servicio de analítica. Antes debe verificarse la ruta del volumen con el comando:
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume inspect analitica_customer1]
+[
+    {
+        "CreatedAt": "2017-10-31T14:48:17Z",
+        "Driver": "local",
+        "Labels": {},
+        **[warning "Mountpoint": "/mnt/sda1/var/lib/docker/volumes/analitica_customer1/_data"],
+        "Name": "analitica_customer1",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+```
+
+ Para este ejemplo el archivo _settings.py_ se encuentra en un repositorio Git, pero puede tener este archivo en cualquier otro lugar. Lo importante es copiarlo al volumen para que el contenedor del servicio pueda accederlo:
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo wget https://raw.githubusercontent.com/alejandrotorresn/Analytic_eve/master/Customers/customer1/settings.py -P /mnt/sda1/var/lib/docker/volumes/analitica_customer1/_data/Notebooks]
+```
 
 * Para inicializar el servicio de analítica:
 
