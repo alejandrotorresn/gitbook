@@ -214,6 +214,13 @@ Repetir estos pasos para el nodo **worker2**.
 
 ## MONITOREO DE DOCKER SWARM
 
+El sistema de monitoreo se base en 3 servicios:
+- Grafana: Es una herramienta popular para graficar que permite construir dahboards con datos provenientes de Graphite, Elasticsearch, OpenTSDB, Prometheus y InfluxDB.
+- cAdvidsor: Colecciona metricas del _host_ y de los contenedores. cAdvisor recoge las métricas en una base de datos como InfluxDB, Prometheus, etc. 
+- InfluxDB: Es un _time series database_ Pueden almacenarse metricas con valores numericos bajo diferentes etiquetas. 
+
+En el nodo **manager1** se crean tres contenedores; Grafana, InfluxDb y cAdvisor, mientras que en los nodos solo se crea un contenedor de cAdvisor para la recolección de las métricas del nodo y de sus contenedores.
+
 * Descargar el archivo _docker-stack.yml_
 
   ```
@@ -228,9 +235,22 @@ Repetir estos pasos para el nodo **worker2**.
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker stack deploy -c docker-stack.yml monitor]
   ```
 
-  **NOTA:** Debe esperar un tiempo hasta que los servicios se inicien antes de poder crear la base de datos del siguiente paso.
+  **NOTA:** Debe esperar un tiempo hasta que los servicios se inicien antes de poder crear la base de datos del siguiente paso. Si desea ver el estado de los servicios puede utilizar el comando:
+  
+  ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ls]   
+```
 
+ Una vez se inicialice los servicios puede inspeccionarlos para ver si los contenedores ya se han inicializado. Esto puede hacerlo con el comando:
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service ps <Nombre_Servicio>]   
+```
+  
 * Crear la base de datos llamada **cadvisor** en InfluxDB:
+
  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker exec `docker ps | grep -i influx | awk '{print $1}'` influx -execute 'CREATE DATABASE cadvisor']   
@@ -240,11 +260,11 @@ Repetir estos pasos para el nodo **worker2**.
 
 * Abrir grafana en el navegador (http://192.168.99.100). El servicio se ha habilitado en el puerto 80 y el usuario es **admin** al igual que la contraseña. Cabe hacer notar que puede usarse cualquier IP vinculada a un nodo del Swarm.
 
-![](/assets/grafana.png)
+ ![](/assets/grafana.png)
 
-* En Grafana crear un nuevo _data source_ con el nombre **influx**, de tipo **InfluxDB**, con url [http://influx:8086](http://influx:8086) y database **cadvisor**.
+* En Grafana crear un nuevo _data source_ con el nombre **influx**, de tipo **InfluxDB**, con url http://influx:8086 y database **cadvisor**.
 
-![](/assets/influxdb_grafana.png)
+ ![](/assets/influxdb_grafana.png)
 
 * Descargar el archivo dashboard.json en el servidor base.
 
@@ -254,17 +274,19 @@ Repetir estos pasos para el nodo **worker2**.
   **[prompt user@server]**[path ~]**[delimiter $ ]**[command wget https://raw.githubusercontent.com/botleg/swarm-monitoring/master/dashboard.json]
   ```
 
-* En el la ventada del navegador donde se encuentra abierto el servicio de Grafana, hacer clic en el icono de la parte superior izquierda, seleccionar _Dashboards_ y luego _import_. Cargar el archivo _dashboard.json_.
+* En la ventada del navegador donde se encuentra abierto el servicio de Grafana, hacer clic en el icono de la parte superior izquierda, seleccionar _Dashboards_ y luego _import_. Cargar el archivo _dashboard.json_.
 
-![](/assets/dashboard_grafana.png)
+ ![](/assets/dashboard_grafana.png)
 
 * Darle un nombre al Dashboard y seleccionar la fuente de datos Influx.
 
-![](/assets/dashboard_import_grafana.png)
+ ![](/assets/dashboard_import_grafana.png)
 
 * Finalmente el servicio de monitoreo quedará como se muestra en la siguiente imagen:
 
-![](/assets/Monitoring.png)
+ ![](/assets/Monitoring.png)
+ 
+ Las gráficas de monitoreo muestran básicamente el estado de la Memoria, la CPU, El uso de la Red y el Sistema de archivos. En la parte superior izquierda puede seleccionarse el host y los contenedores de los cuales quiere verse sus respectivas métricas.
 
 ## CONFIGURACIÓN DEL ENTORNO DE ANÁLITICA DE DATOS
 
