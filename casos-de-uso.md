@@ -831,7 +831,7 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
  
  ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo wget https://raw.githubusercontent.com/alejandrotorresn/Analytic_eve/master/Customers/customer1/settings.py -P /mnt/sda1/var/lib/docker/volumes/analitica_customer1/_data/Notebooks]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo wget https://raw.githubusercontent.com/alejandrotorresn/Analytic_eve/master/Customers/customer1/settings.py -P /mnt/sda1/var/lib/docker/volumes/analitica_customer1/_data]
 ```
 
 * Para inicializar el servicio de analítica:
@@ -1009,8 +1009,8 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 
    ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer1/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/Notebooks/settings_cust1.py]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer2/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/Notebooks/settings_cust2.py]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer1/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/settings_cust1.py]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer2/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/settings_cust2.py]
 ```
 
  * Para inicializar el servicio de analítica:
