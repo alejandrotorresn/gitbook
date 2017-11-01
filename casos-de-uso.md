@@ -897,12 +897,89 @@ En la gráfica se observa que se ha impreso el contenido de las variables de ent
 
 ### CASOS DE USO - AVANZADO
 
+Para estos casos de uso se asume que ya se han creado los nodos **manager1** y **worker1**, se ha inicializado el Swarm, se han creado las imagenes y almacenadas en el _registry_.
+
+Para los casos de uso avanzado se necesita descargar los archivos desde github:
+
+```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command git clone https://github.com/alejandrotorresn/Analytic_eve.git]
+```
+
+Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para implementar los servicios de Eve necesarios para estos casos de uso.
+
 #### CASO 1
 
 * Un servicio de Mongo.
 * Un servicio de Eve para el _customer1_ con una sola replica en el puerto 6001.
 * Un servicio de Eve para el _customer2_ dos replicas en el puerto 6002.
 * Un servicio de Analítica de Datos.
+
+---
+**Despliegue de los servicios**
+
+---
+
+* Servicio de Mongo.
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongodata]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongoconfig]
+```
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name mongo_eve --replicas 1 --network services_overlay --publish 27017:27017 --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' localhost:5000/mongo]
+```
+
+* Servicio de Eve para el _customer1_ con una sola replica en el puerto 6001.
+
+ * Ingresar a la carpeta customer1.
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analytic_eve/Customers/customer1]
+```
+
+ * Lanzar el servicio de Eve:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command docker service create --name eve_customer1 --replicas 1 --network services_overlay --publish 6001:80 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --mount type=bind,source=/home/docker/Analytic_eve/Customers/customer1,destination=/home/eve --constraint 'node.hostname == manager1' localhost:5000/eve_apache]
+```
+
+* Servicio de Eve para el _customer2_ dos replicas en el puerto 6002.
+
+ Para poder implementar el servicio de Eve con dos replicas se hace necesario que los archivos de configuración se encuentren en ambos nodos (**manager1** y **worker1**). Por lo tanto, se debe ingresar al nodo **worker1** y descargarlos desde el repositorio git.
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command exit]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh worker1]
+**[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command git clone https://github.com/alejandrotorresn/Analytic_eve.git]
+**[prompt docker@worker1]**[path ~]**[delimiter $ ]**[command exit]
+**[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1]
+```
+
+* Ingresar a la carpeta customer2.
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd /Analytic_eve/Customers/customer2]
+```
+
+ * Lanzar el servicio de Eve:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer2]**[delimiter $ ]**[command docker service create --name eve_customer2 --replicas 2 --network services_overlay --publish 6002:80 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer2_db --mount type=bind,source=/home/docker/Analytic_eve/Customers/customer2,destination=/home/eve localhost:5000/eve_apache]
+```
+
+* Servicio de Analítica de Datos.
+
+
+
 
 #### CASO 2
 
