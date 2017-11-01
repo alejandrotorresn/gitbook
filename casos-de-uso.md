@@ -1112,7 +1112,14 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust_1 --constraint 'node.hostname == manager1' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME1=customer1_db --network services_overlay --mount type=volume,source=analitica_customer_1,target=/home/analytics/Notebooks localhost:5000/analitica_datos]
 ```
- 
+
+ **NOTA:** Una vez finalizado el uso del servicio, este debe ser terminado con el siguiente comando:
+  
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service rm analitica_cust_1]
+```
+   
 #### CASO 3
 
 * Un servicio de Mongo corriendo permanentemente.
@@ -1125,9 +1132,115 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 
 ---
 
-* Un servicio de Mongo corriendo permanentemente.
+* Servicio de Mongo corriendo permanentemente.
+
+ Los servicios en Swarm corren siempre de forma permanente hasta que el mismo sea removido. Sin importar que los nodos se reinicien, los servicios se inician junto con los nodos. Para inicializar el servicio de Mongo se deben crear los volumenes e inicializar el servicio:
+
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongodata]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongoconfig]
+```
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name mongo_eve --replicas 1 --network services_overlay --publish 27017:27017 --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' localhost:5000/mongo]
+```
+
+ **NOTA:** Recuerde que los volumenes deben ser creados en el nodo en donde se quiere lanzar el servicio. Para este caso los volumenes se crean en el nodo **manager1* y el servicio es lanzado en este mismo nodo especificandolo mediante el parametro _--constraint 'node.hostname == manager1'_.
+
+
 * Un servicio de Eve para el _customer1_ corriendo permanentemente.
+
+Como se comento antes, los servicios en Swarm son permanentes, por lo tanto solo deben ser lanzados para que sean persistentes.
+
+ * Ingresar a la carpeta customer1.
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analytic_eve/Customers/customer1]
+```
+
+ * Lanzar el servicio de Eve para el _customer1_:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command docker service create --name eve_customer1 --replicas 1 --network services_overlay --publish 6001:80 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --mount type=bind,source=/home/docker/Analytic_eve/Customers/customer1,destination=/home/eve --constraint 'node.hostname == manager1' localhost:5000/eve_apache]
+```
+
+ **NOTA:** Recuerde que si quiere lanzar el servicio en otro nodo diferente al **manager1**, los archivos de configuración de Eve deben encontrarse en ese otro nodo.
+
 * Un servicio de Eve para el _customer2_ corriendo de forma ocasional.
+
+ * Ingresar a la carpeta customer2.
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analytic_eve/Customers/customer2]
+```
+
+ * Lanzar el servicio de Eve para el _customer2_:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer2]**[delimiter $ ]**[command docker service create --name eve_customer2 --replicas 1 --network services_overlay --publish 6002:80 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer2_db --mount type=bind,source=/home/docker/Analytic_eve/Customers/customer2,destination=/home/eve --constraint 'node.hostname == manager1' localhost:5000/eve_apache]
+```
+
+ * Finalizar el servicio una vez su uso ya no sea necesario.
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer2]**[delimiter $ ]**[command docker service rm eve_customer2]
+```
+
 * Servicio de Analítica de Datos corriendo de forma ocasional.
+
+ * Crear el volumen
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer_1_2]
+```
+
+ * Verificarse la ruta del volumen con el comando:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume inspect analitica_customer_1_2]
+[
+{
+"CreatedAt": "2017-11-01T01:17:03Z",
+"Driver": "local",
+"Labels": {},
+"Mountpoint": "/mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data",
+"Name": "analitica_customer_1_2",
+"Options": {},
+"Scope": "local"
+}
+]
+```
+
+ * Copiar los archivos **settings.py** del _customer1_ y _customer2_ al volumen que contendrá los archivos del servicio de analítica.
+   
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer1/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/settings_cust1.py]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer2/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/settings_cust2.py]
+```
+
+ * Para inicializar el servicio de analítica:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust_1_2 --constraint 'node.hostname == manager1' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME1=customer1_db --env MONGO_DBNAME1=customer2_db --network services_overlay --mount type=volume,source=analitica_customer_1_2,target=/home/analytics/Notebooks localhost:5000/analitica_datos]
+```
+
+ * Finalizar el uso del servicio de analítica:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service rm analitica_cust_1_2]
+```
+
 
 
