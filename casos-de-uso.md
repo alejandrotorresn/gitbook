@@ -1041,35 +1041,32 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name mongoconfig]
 ```
 
-```
+   ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name mongo_eve --replicas 1 --network services_overlay --publish 27017:27017 --mount type=volume,source=mongodata,target=/data/db --mount type=volume,source=mongoconfig,target=/data/configdb --constraint 'node.hostname == manager1' localhost:5000/mongo]
 ```
 
  **NOTA:** Recuerde que los volumenes deben ser creados en el nodo en donde se quiere lanzar el servicio. Para este caso los volumenes se crean en el nodo **manager1* y el servicio es lanzado en este mismo nodo especificandolo mediante el parametro _--constraint 'node.hostname == manager1'_.
 
-
 * Un servicio de Eve corriendo de forma permanente.
 
  Como se comento antes, los servicios en Swarm son permanentes, por lo tanto solo deben ser lanzados para que sean persistentes.
 
+ * Ingresar a la carpeta customer1.
 
-* Ingresar a la carpeta customer1.
-
-```
+  ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analytic_eve/Customers/customer1]
 ```
 
-* Lanzar el servicio de Eve:
+ * Lanzar el servicio de Eve:
 
-```
+   ```
 **[terminal]
 **[prompt docker@manager1]**[path ~/Analytic_eve/Customers/customer1]**[delimiter $ ]**[command docker service create --name eve_customer1 --replicas 1 --network services_overlay --publish 6001:80 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --mount type=bind,source=/home/docker/Analytic_eve/Customers/customer1,destination=/home/eve --constraint 'node.hostname == manager1' localhost:5000/eve_apache]
 ```
 
  **NOTA:** Recuerde que si quiere lanzar el servicio en otro nodo diferente al **manager1**, los archivos de configuración de Eve deben encontrarse en ese otro nodo. 
- 
 
 * Un servicio de analítica corriendo de forma ocasional.
 
@@ -1084,9 +1081,9 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer_1]
 ```
 
-* Verificarse la ruta del volumen con el comando:
+ * Verificarse la ruta del volumen con el comando:
 
-```
+   ```
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume inspect analitica_customer_1]
 [
