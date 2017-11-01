@@ -1115,17 +1115,19 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
  
 #### CASO 3
 
----
-**Despliegue de los servicios**
-
----
-
-
-
 * Un servicio de Mongo corriendo permanentemente.
 * Un servicio de Eve para el _customer1_ corriendo permanentemente.
 * Un servicio de Eve para el _customer2_ corriendo de forma ocasional.
 * Servicio de Analítica de Datos corriendo de forma ocasional.
 
+---
+**Despliegue de los servicios**
+
+---
+
+* Un servicio de Mongo corriendo permanentemente.
+* Un servicio de Eve para el _customer1_ corriendo permanentemente.
+* Un servicio de Eve para el _customer2_ corriendo de forma ocasional.
+* Servicio de Analítica de Datos corriendo de forma ocasional.
 
 
