@@ -893,6 +893,8 @@ for post in collection.find():
 
 En la gráfica se observa que se ha impreso el contenido de las variables de entorno, realizado la conexión con la base de datos y consultado la colección _user_. Esta colección es la que contiene los datos que se han insertado mediante el servidor _Eve_ y que han sido enviados usando un archivo _json_ y un archivo _json_ comprimido _gzip._
 
+**NOTA:** Tiene que tenerse en cuenta que los volumenes se crean  de forma local, en otroas palabras solo pueden encontrarse en el nodo en el que se han creado. Si desea usar otro nodo diferente del **manager1** tiene que entrar a el nodo donde desplegará el servicio y crear el volumen correspondiente. 
+
 ### CASOS DE USO - AVANZADO
 
 #### CASO 1
