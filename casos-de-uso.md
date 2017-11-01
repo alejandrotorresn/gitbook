@@ -809,7 +809,7 @@ El servicio de **Analítica de Datos** requiere que al inicializarse se pase com
   **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer1]
   ```
 
-* Copiar el archivo **settings.py** del _customer1_ al voluemen que contendrá los archivos del servicio de analítica. Antes debe verificarse la ruta del volumen con el comando:
+* Copiar el archivo **settings.py** del _customer1_ al volumen que contendrá los archivos del servicio de analítica. Antes debe verificarse la ruta del volumen con el comando:
 
  ```
 **[terminal]
@@ -966,7 +966,7 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 
    ```
 **[terminal]
-**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd /Analytic_eve/Customers/customer2]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command cd Analytic_eve/Customers/customer2]
 ```
 
  * Lanzar el servicio de Eve:
@@ -978,8 +978,47 @@ Dentro de la ruta ~/Analityc_eve/Customers/ se encuentran los archivos para impl
 
 * Servicio de Analítica de Datos.
 
+ Para el servicio de Analítica se deben pasar los archivos settings.py de ambos _customers_. Para ello se deben copiar al volumen creado para el servicio. En el caso de uso básico el archivo fue descargado desde el repositorio, para este caso particular se copiaran los archivos desde el repositorio ya descargado hacia el volumen.
+ 
+  * Crear el volumen
 
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume create --name analitica_customer_1_2]
+```
 
+ * Verificarse la ruta del volumen con el comando:
+
+    ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume inspect analitica_customer_1_2]
+[
+    {
+        "CreatedAt": "2017-11-01T01:17:03Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data",
+        "Name": "analitica_customer_1_2",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+```
+
+ * Copiar los archivos **settings.py** del _customer1_ y _customer2_ al volumen que contendrá los archivos del servicio de analítica.
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer1/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/Notebooks/settings_cust1.py]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command sudo cp /home/docker/Analytic_eve/Customers/customer2/settings.py /mnt/sda1/var/lib/docker/volumes/analitica_customer_1_2/_data/Notebooks/settings_cust2.py]
+```
+
+ * Para inicializar el servicio de analítica:
+
+   ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica_cust_1_2 --constraint 'node.hostname == manager1' --publish 8888:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME1=customer1_db --env MONGO_DBNAME1=customer2_db --network services_overlay --mount type=volume,source=analitica_customer_1_2,target=/home/analytics/Notebooks localhost:5000/analitica_datos]
+```
 
 #### CASO 2
 
