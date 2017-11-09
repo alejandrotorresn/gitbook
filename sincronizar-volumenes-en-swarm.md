@@ -14,8 +14,6 @@ docker@manager1:~$ docker service create --name Sync_manager1 --constraint 'node
 
 ![](/assets/1.png)
 
-
-
 ![](/assets/2.png)
 
 ![](/assets/3.png)
