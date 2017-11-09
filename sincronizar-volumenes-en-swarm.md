@@ -1,24 +1,62 @@
 # SINCRONIZAR VOLUMENES EN SWARM
 
-
-
-
-
 ```
 antares@pleyades:~$ docker-machine ssh manager1 docker volume create data_analytics
 data_analytics
 antares@pleyades:~$ docker-machine ssh worker1 docker volume create data_analytics
 data_analytics
-antares@pleyades:~$ 
+antares@pleyades:~$
 ```
-
-
-
-
 
 ```
 docker@manager1:~$ docker service create --name Sync_manager1 --constraint 'node.hostname == manager1' -p 8888:8888 -p 55555 --mount type=volume,source=data_analytics,destination=/mnt/sync --restart-condition on-failure resilio/sync
 ```
+
+
+
+![](/assets/1.png)
+
+![](/assets/2.png)
+
+
+
+![](/assets/3.png)
+
+
+
+
+
+![](/assets/4.png)
+
+
+
+![](/assets/5.png)
+
+
+
+
+
+
+
+![](/assets/6.png)
+
+
+
+![](/assets/7.png)
+
+
+
+![](/assets/8.png)
+
+![](/assets/9.png)
+
+
+
+![](/assets/10.png)
+
+
+
+![](/assets/11.png)
 
 
 
@@ -28,7 +66,29 @@ docker@manager1:~$ docker service create --name Sync_worker1 --constraint 'node.
 
 
 
+![](/assets/12.png)
 
 
 
+![](/assets/13.png)
+
+
+
+![](/assets/14.png)
+
+
+
+![](/assets/15.png)
+
+
+
+![](/assets/16.png)
+
+
+
+![](/assets/17.png)
+
+
+
+![](/assets/18.png)
 
