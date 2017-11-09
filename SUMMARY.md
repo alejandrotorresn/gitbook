@@ -8,4 +8,5 @@
 * [Administracion de nodos en Swarm](administracion-de-nodos-en-swarm.md)
 * [Swarm Mode - Implementación En Análitica de Datos](casos-de-uso.md)
 * [Red Overlay sin  Swarm](overlay-networking-sin-swarm.md)
+* [Sincronizar volumenes en Swarm](sincronizar-volumenes-en-swarm.md)
 
