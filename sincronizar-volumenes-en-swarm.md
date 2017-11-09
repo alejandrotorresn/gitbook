@@ -1,7 +1,6 @@
 # SINCRONIZAR VOLUMENES EN SWARM
 
 
-
 ```
 **[terminal]
 **[prompt user@server]**[path ~]**[delimiter $ ]**[command docker-machine ssh manager1 docker volume create data_analytics]
