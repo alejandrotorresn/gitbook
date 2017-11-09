@@ -115,6 +115,30 @@ data_analytics
 **[terminal]
 **[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica --constraint 'node.hostname == manager1' --publish 80:8888 --mount type=volume,source=data_analytics,target=/home/analytics/Notebook localhost:5000/analitica_datos]
 ```
+ **Nota:** Tambien puede montar directamente la ruta donde se encuentra el volumen. Para ello, puede obtener la ruta con el siguiente comando:
+ 
+ ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker volume inspect data_analytics]
+[
+    {
+        "CreatedAt": "2017-11-09T23:21:25Z",
+        "Driver": "local",
+        "Labels": {},
+**[warning        "Mountpoint": "/mnt/sda1/var/lib/docker/volumes/data_analytics/_data"],
+        "Name": "data_analytics",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+```
+
+ Lanzar el servicio especificando la ruta del volumen y la carpeta que **Resilio Sync** sincroniza.
+ 
+  ```
+**[terminal]
+**[prompt docker@manager1]**[path ~]**[delimiter $ ]**[command docker service create --name analitica --constraint 'node.hostname == manager1' --publish 80:8888 --mount type=bind,source=/mnt/sda1/var/lib/docker/volumes/data_analytics/_data/folders,target=/home/analytics/Notebook localhost:5000/analitica_datos]
+```
 
 
 
