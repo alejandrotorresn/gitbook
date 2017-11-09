@@ -52,6 +52,18 @@ docker@manager1:~$ docker service create --name Sync_worker1 --constraint 'node.
 
 ![](/assets/18.png)
 
+
+
+
+
+```
+antares@pleyades:~$ docker-machine ssh manager1 sudo chown -R 999:999 /mnt/sda1/var/lib/docker/volumes/data_analytics/_data/folders
+antares@pleyades:~$ docker-machine ssh worker1 sudo chown -R 999:999 /mnt/sda1/var/lib/docker/volumes/data_analytics/_data/folders
+
+```
+
+
+
 ```
 docker@manager1:$ docker service create --name analitica --constraint 'node.hostname == manager1' --publish 80:8888 --env MONGO_HOST=mongo_eve --env MONGO_PORT=27017 --env MONGO_DBNAME=customer1_db --network services_overlay --mount type=volume,source=data_analytics,target=/home/analytics/Notebook localhost:5000/analitica_datos
 ```
