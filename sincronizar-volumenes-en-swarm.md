@@ -54,11 +54,7 @@ docker@manager1:~$ docker service create --name Sync_worker1 --constraint 'node.
 
 ![](/assets/19.png)
 
-
-
 ![](/assets/20.png)
-
-
 
 ```
 antares@pleyades:~$ docker-machine ssh manager1 sudo chown -R 999:999 /mnt/sda1/var/lib/docker/volumes/data_analytics/_data/folders
